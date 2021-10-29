@@ -1,19 +1,17 @@
-
 import { useQuery, gql } from "@apollo/client";
-import logo from './assets/eee.png';
+import logo from "./assets/eee.png";
 import "./App.css";
 
 const GET_TASKS = gql`
-query Query {
-  getTasks {
-    id
-    title
-    description
-    advancement
-    status
-    scheduled_time
+  query Query {
+    getTasks {
+      id
+      title
+      description
+      advancement
+      status
+    }
   }
-}
 `;
 
 function App() {
@@ -28,15 +26,14 @@ function App() {
         <h1>title</h1>
         <h1>description</h1>
         <h1>Temps estimé</h1>
-
       </div>
       {data.getTasks.map((task) => (
-  <div key={task.id} className="task">
-  <h2 >{task.title}</h2>
-  <h2 >{task.description}</h2>
-  <h2 >{task.scheduled_time}%</h2>
-  </div>
-))}
+        <div key={task.id} className="task">
+          <h2>{task.title}</h2>
+          <h2>{task.description}</h2>
+          <h2>{task.scheduled_time}%</h2>
+        </div>
+      ))}
     </div>
   );
 }
