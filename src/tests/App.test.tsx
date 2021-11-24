@@ -30,7 +30,10 @@ describe("On component mount", () => {
               request: {
                 query: GET_TASKS
               },
-              error: new Error('samaire'),
+              result : {
+
+                errors: [new GraphQLError('error')],
+              }
             }
           ]
        }
