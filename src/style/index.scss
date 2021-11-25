@@ -1,4 +1,6 @@
-@import url('./style/reset.css');
+@import 'reset.scss';
+@import 'variables.scss';
+@import 'mixins.scss';
 
 body {
   font-family: Roboto, sans-serif;
