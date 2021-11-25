@@ -24,11 +24,11 @@ $electricblue           : #4269F4;
 // Color Scheme
 $primary                : #000;
 $secondary              : #000 ;
-$highlight              : #000;
+$highlight              : #FFF;
 
 // Links
 $link-default           : $highlight;
-$link-visited           : $link-default;
+$link-visilted          : $link-default;
 $link-hover             : darken($link-default, 20%);
 $link-active            : darken($link-default, 20%);
 
@@ -64,3 +64,12 @@ $radius_small           : 4px;
 // @include media(">200px") {
 // 	width: 50%;
 // }
+
+
+// Containers
+
+$login_container: 547px;
+
+// transition
+
+$regular_transition: all 200ms ease-in;

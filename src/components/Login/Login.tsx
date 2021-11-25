@@ -27,41 +27,54 @@ const Login: React.FC = (): any => {
   }
 
   return (
-    <div className="login_wrapper">
-      <img src={logo} alt="logo" />
-      <form onSubmit={handleSubmit} className="login">
-        <input
-          id="username"
-          name="username"
-          type="text"
-          placeholder="username"
-          value={values.username}
-          onChange={handleChange}
-          autoFocus
-          required
-          className="login_input"
-        />
-        <input
-          id="password"
-          name="password"
-          type="password"
-          required
-          placeholder="password"
-          onChange={handleChange}
-          value={values.password}
-          className="login_input"
-        />
-        <button type="submit" className="login_submit">
-          Login
-        </button>
-        <a href="#" className="login_submit">
-          Sign Up
-        </a>
-        <a href="#" className="login_submit">
-          Forgot Password?
-        </a>
-      </form>
-    </div>
+    <>
+      <div className="asterisk">
+        <div className="asterisk_single">*</div>
+        <div className="asterisk_single">*</div>
+        <div className="asterisk_single">*</div>
+      </div>
+      <div className="login_wrapper">
+        <div className="login_logo">
+          <img src={logo} alt="logo" />
+          </div>
+        <form onSubmit={handleSubmit} className="login">
+          {/* <div> */}
+          <input
+            id="username"
+            name="username"
+            type="text"
+            placeholder="username"
+            value={values.username}
+            onChange={handleChange}
+            autoFocus
+            required
+            className="login_input"
+          />
+          <input
+            id="password"
+            name="password"
+            type="password"
+            required
+            placeholder="password"
+            onChange={handleChange}
+            value={values.password}
+            className="login_input"
+          />
+          {/* </div> */}
+          <button type="submit" className="login_submit">
+            Login
+          </button>
+          <div className="login_link">
+            <a href="#" className="login_link_single" >
+              Sign Up
+            </a>
+            <a href="#" className="login_link_single" >
+              Forgot Password?
+            </a>
+          </div>
+        </form>
+      </div>
+    </>
   )
 }
 

@@ -1,18 +1,80 @@
 @import '../../style/index.scss';
 
+.asterisk {
+  margin: 10% auto 40px;
+  line-height: 0;
+  max-width: $login_container;
+  display: flex;
+  font-size: 9rem;
+  @include justify-content(space-between);
+
+  &_single {
+    -webkit-text-stroke: 3px $primary;
+
+    &:first-child {
+      color: $yellow;
+    }
+
+    &:nth-child(2) {
+      color: $red;
+      margin-top: -40px;
+    }
+
+    &:last-child {
+      color: $pink;
+    }
+  }
+}
+
 .login_wrapper {
-  max-width: 547px;
-  height: 409px;
+  max-width: $login_container;
   margin: 0 auto;
+  @include flexbox_center(column);
   border: 2px $primary solid;
   border-radius: $radius_small;
   box-shadow: $shadow_regular;
+  padding: 40px 0;
 
   .login {
+    @include flexbox_center(column);
+    width: 75%;
+
+    &_logo {
+      width: 75%;
+      margin: auto;
+    }
+
     &_input {
       display: block;
-      max-width: 410px;
+      width: 100%;
       height: 46px;
+      margin: 0 auto 24px;
+      border: 2px $primary solid;
+      border-radius: $radius_small;
+      line-height: 19px;
+      padding: 0 15px;
+    }
+
+    &_submit {
+      width: 171px;
+      height: 46px;
+      background: inherit;
+      border-radius: $radius_small;
+      margin: 0 auto;
+      @include button-hover($primary, $link-hover, $regular_transition);
+    }
+
+    &_link {
+      width: 171px;
+      font-weight: 300;
+      font-size: .8rem;
+      display: flex;
+      @include justify-content(space-around);
+      margin-top: 17px;
+
+      &_single {
+        @include link-hover($regular_transition, 500);
+      }
     }
   }
 }
