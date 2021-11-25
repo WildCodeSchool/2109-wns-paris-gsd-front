@@ -1,10 +1,11 @@
-@import 'reset.scss';
-@import 'variables.scss';
-@import 'mixins.scss';
+@import '_reset.scss';
+@import '_vars.scss';
+@import '_mixins.scss';
 
 body {
   font-family: Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
+  min-height: 100%;
 }

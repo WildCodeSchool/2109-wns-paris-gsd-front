@@ -1,8 +1,9 @@
-import { useLazyQuery, useQuery } from '@apollo/client'
+import { useLazyQuery } from '@apollo/client'
 import { LOGIN_USER } from '../../query'
-import { useEffect } from 'react'
 import { useForm } from '../../hooks/hooks'
 import { Navigate } from 'react-router-dom'
+import './Login.scss'
+import logo from '../../assets/eee.png'
 
 const Login: React.FC = (): any => {
   // Lazy query for login user method
@@ -16,23 +17,19 @@ const Login: React.FC = (): any => {
       password: '',
     }
   )
-  // Wait for lazy query
-  // if (called && loading) return <Loading />
 
-  // Show error message if lazy query fails
   if (error) return console.log(error)
 
-  // Store token if login is successful
   if (data) {
     window.localStorage.setItem('token', data.loginUser)
 
-    // // Redirect to home page
     return <Navigate to="/dashboard" />
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className="login_wrapper">
+      <img src={logo} alt="logo" />
+      <form onSubmit={handleSubmit} className="login">
         <input
           id="username"
           name="username"
@@ -42,6 +39,7 @@ const Login: React.FC = (): any => {
           onChange={handleChange}
           autoFocus
           required
+          className="login_input"
         />
         <input
           id="password"
@@ -51,10 +49,17 @@ const Login: React.FC = (): any => {
           placeholder="password"
           onChange={handleChange}
           value={values.password}
+          className="login_input"
         />
-        <button type="submit">Login</button>
-        <a href="">Sign Up</a>
-        <a href="">Forgot Password?</a>
+        <button type="submit" className="login_submit">
+          Login
+        </button>
+        <a href="#" className="login_submit">
+          Sign Up
+        </a>
+        <a href="#" className="login_submit">
+          Forgot Password?
+        </a>
       </form>
     </div>
   )
