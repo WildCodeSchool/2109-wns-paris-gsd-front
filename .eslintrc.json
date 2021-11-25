@@ -5,7 +5,6 @@
   },
   "extends": [
     "plugin:react/recommended",
-    "airbnb",
     "airbnb-typescript",
     "plugin:@typescript-eslint/recommended",
     "prettier"
@@ -19,7 +18,13 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": ["react", "@typescript-eslint", "prettier", "react-hooks"],
+  "plugins": [
+    "react",
+    "@typescript-eslint",
+    "prettier",
+    "react-hooks",
+    "import"
+  ],
   "rules": {
     "no-use-before-define": "off",
     "@typescript-eslint/no-use-before-define": ["error"],
