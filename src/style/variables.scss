@@ -1,0 +1,66 @@
+/**
+ * Global variables
+ * =================================
+ * - Generic colors
+ * - Color scheme
+ * - Links
+ * - Text selection
+ * - Shadows
+ * - Border radius
+ * - Breakpoints
+ * - Any others..
+ */
+
+
+
+// Generic colors
+$yellow                 : #f4bf42;
+$red                    : #ea3358;
+$blue                   : #5dcffa;
+$pink                   : #ef89c3;
+$green                  : #21AB38;
+$electricblue           : #4269F4;
+
+// Color Scheme
+$primary                : #000;
+$secondary              : #000 ;
+$highlight              : #000;
+
+// Links
+$link-default           : $highlight;
+$link-visited           : $link-default;
+$link-hover             : darken($link-default, 20%);
+$link-active            : darken($link-default, 20%);
+
+// Text Selection
+$color-selection        : #fff;
+$color-selection-bg     : $primary;
+
+// Shadows
+$shadow_regular         : 0px 11px 20px #e5e5e5, 0px -4px 20px #e5e5e5;
+
+// Border radius
+$radius_small           : 4px;
+
+// Breakpoints
+ $breakpoints: (
+	narrow              : 400px,
+	mid                 : 750px,
+	wide                : 1000px,
+	huge                : 1250px
+);
+
+// Equivalent to min-width query
+// @include media(">mid") {
+// 	width: 50%;
+// }
+
+// Equivalent to min-width and max-width query
+// @include media(">narrow", "<=wide") {
+// 	width: 50%;
+// }
+
+// Equivalent to min-width
+// @include media(">200px") {
+// 	width: 50%;
+// }

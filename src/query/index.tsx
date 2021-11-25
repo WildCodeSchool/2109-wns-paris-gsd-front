@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client'
 
 export const GET_TASKS = gql`
   query Query {
@@ -11,4 +11,10 @@ export const GET_TASKS = gql`
       scheduled_time
     }
   }
-`;
+`
+
+export const LOGIN_USER = gql`
+  query LoginUser($data: LoginInput!) {
+    loginUser(data: $data)
+  }
+`
