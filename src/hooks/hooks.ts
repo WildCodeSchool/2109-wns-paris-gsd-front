@@ -1,4 +1,4 @@
-import { ChangeEvent, ReactEventHandler, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import IFormInput from '../interfaces/FormInput'
 
 const useForm = (
@@ -20,7 +20,8 @@ const useForm = (
     onSubmit: React.FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault()
-    callback(values)
+    callback(values);
+  
   }
 
   return {

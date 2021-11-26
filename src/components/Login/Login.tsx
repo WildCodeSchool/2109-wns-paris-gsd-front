@@ -18,10 +18,13 @@ const Login: React.FC = (): any => {
     }
   )
 
-  if (error) return console.log(error)
+  if (error) {
+    console.log(error)
+    return <div>ya une couille</div>
+  }
 
   if (data) {
-    window.localStorage.setItem('token', data.loginUser)
+    window.localStorage.setItem('token', data.loginUser.token)
 
     return <Navigate to="/dashboard" />
   }
