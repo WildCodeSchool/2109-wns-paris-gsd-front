@@ -1,28 +1,33 @@
 import { useLazyQuery } from '@apollo/client'
 import { LOGIN_USER } from '../../query'
-import { useForm } from 'react-hook-form'
-import IFormInput from '../../interfaces/FormInput'
+import { useForm } from '../../hooks/hooks'
+import { Navigate } from 'react-router-dom'
 import './Login.scss'
 import logo from '../../assets/eee.png'
 
 const Login: React.FC = (): any => {
   // Lazy query for login user method
-  const [loginUser, { loading, data: loginData, error }] = useLazyQuery(LOGIN_USER)
+  const [loginUser, { data, error }] = useLazyQuery(LOGIN_USER)
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<IFormInput>()
+  // Use form state
+  const { values, handleChange, handleSubmit } = useForm(
+    (credentials) => loginUser({ variables: { data: credentials } }),
+    {
+      username: '',
+      password: '',
+    }
+  )
 
-  const onSubmit = handleSubmit(async (credentials) => {
-    loginUser({variables: { data: credentials }});
-  });
+  if (error) {
+    console.log(error)
+    return <div>ya une couille</div>
+  }
 
-  if (loading) return <h2>loading...</h2>;
-  if (error) return <h2>{`Error: ${error}`}</h2>;
-  if (loginData) console.log(loginData);
+  if (data) {
+    window.localStorage.setItem('token', data.loginUser.token)
 
+    return <Navigate to="/dashboard" />
+  }
 
   return (
     <>
@@ -34,33 +39,39 @@ const Login: React.FC = (): any => {
       <div className="login_wrapper">
         <div className="login_logo">
           <img src={logo} alt="logo" />
-        </div>
-        <form onSubmit={onSubmit} className="login">
+          </div>
+        <form onSubmit={handleSubmit} className="login">
           {/* <div> */}
           <input
             id="username"
+            name="username"
+            type="text"
             placeholder="username"
-            className="login_input"
+            value={values.username}
+            onChange={handleChange}
+            autoFocus
             required
-            {...register("username")}
+            className="login_input"
           />
           <input
             id="password"
+            name="password"
             type="password"
             required
             placeholder="password"
+            onChange={handleChange}
+            value={values.password}
             className="login_input"
-            {...register("password")}
           />
           {/* </div> */}
           <button type="submit" className="login_submit">
             Login
           </button>
           <div className="login_link">
-            <a href="#" className="login_link_single">
+            <a href="#" className="login_link_single" >
               Sign Up
             </a>
-            <a href="#" className="login_link_single">
+            <a href="#" className="login_link_single" >
               Forgot Password?
             </a>
           </div>
