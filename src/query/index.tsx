@@ -1,14 +1,32 @@
 import { gql } from '@apollo/client'
 
+// query Query {
+//   getTasks {
+//     id
+//     title
+//     description
+//     advancement
+//     status
+//     scheduled_time
+//   }
+// }
 export const GET_TASKS = gql`
-  query Query {
+  query GetTasks {
     getTasks {
       id
       title
-      description
-      advancement
       status
-      scheduled_time
+      description
+      estimated_time
+      starting_time
+      ending_time
+      taskCreator {
+        username
+        email
+        role {
+          label
+        }
+      }
     }
   }
 `
