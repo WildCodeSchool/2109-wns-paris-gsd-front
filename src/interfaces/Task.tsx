@@ -1,4 +1,5 @@
 import IComment from './Comment';
+import IUser from './User';
 
 export default interface ITask {
     id?: number,
@@ -6,6 +7,7 @@ export default interface ITask {
     description?: string,
     advancement?: number,
     status?: string,
-    scheduled_time?: string,
-    comments: [IComment]
+    estimated_time?: number,
+    comments?: [IComment],
+    taskCreator?: IUser,
 }

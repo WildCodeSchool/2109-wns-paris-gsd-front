@@ -18,12 +18,15 @@ const Tasks: React.FC = () => {
         <h1>title</h1>
         <h1>description</h1>
         <h1>Temps estimé</h1>
+        <h1>Createur de la tache</h1>
       </div>
       {data.getTasks.map((task: ITask) => (
         <div key={task.id} className="task">
           <h2>{task.title}</h2>
           <h2>{task.description}</h2>
-          <h2>{task.scheduled_time}%</h2>
+          <h2>{task.estimated_time}</h2>
+          <h2>tache cree par: </h2>
+          <h2>username: {task.taskCreator?.username} - role: {task.taskCreator?.role?.label}</h2>          
         </div>
       ))}
     </div>
