@@ -19,7 +19,7 @@ const Login: React.FC = (): any => {
     loginUser({variables: { data: credentials }});
   });
 
-  if (loading) return <h2>loading...</h2>;
+  if (loading) return <h2>it is loading my dudes!!!...</h2>;
   if (error) return <h2>{`Error: ${error}`}</h2>;
   if (loginData) console.log(loginData);
 
