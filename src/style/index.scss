@@ -10,3 +10,13 @@ body {
   scroll-behavior: smooth;
   min-height: 100%;
 }
+
+:root {
+  --bg-color: #fff;
+  --text-color: #121212;
+}
+
+[data-theme="dark"] {
+  --bg-color: #121212;
+  --text-color: #fff;
+}

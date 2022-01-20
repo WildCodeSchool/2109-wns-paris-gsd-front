@@ -37,7 +37,7 @@ $color-selection        : #fff;
 $color-selection-bg     : $primary;
 
 // Shadows
-$shadow_regular         : 0px 11px 20px #e5e5e5, 0px -4px 20px #e5e5e5;
+$shadow_regular         : 0px 11px 20px rgba(#121212, .4), 0px -4px 20px rgba(#121212, .4);
 
 // Border radius
 $radius_small           : 4px;
