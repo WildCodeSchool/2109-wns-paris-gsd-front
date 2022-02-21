@@ -7,7 +7,7 @@
   max-width: $login_container;
   display: flex;
   font-size: 9rem;
-  @include justify-content(space-between);
+  justify-content: space-between;
 
   &_single {
     -webkit-text-stroke: 3px var(--text-color);
@@ -30,14 +30,14 @@
 .login_wrapper {
   max-width: $login_container;
   margin: 0 auto;
-  @include flexbox_center(column);
+  display: flex;
   border: 2px var(--text-color) solid;
   border-radius: $radius_small;
   box-shadow: $shadow_regular;
   padding: 40px 0;
 
   .login {
-    @include flexbox_center(column);
+    display: flex;
     width: 75%;
 
     &_logo {
@@ -78,7 +78,7 @@
       font-weight: 300;
       font-size: 0.8rem;
       display: flex;
-      @include justify-content(space-around);
+      justify-content: space-around;
       margin-top: 17px;
 
       &_single {

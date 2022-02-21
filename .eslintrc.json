@@ -16,7 +16,9 @@
     },
     "project": "./tsconfig.json",
     "ecmaVersion": 12,
-    "sourceType": "module"
+    "sourceType": "module",
+    "tsconfigRootDir": "front/"
+
   },
   "plugins": [
     "react",
