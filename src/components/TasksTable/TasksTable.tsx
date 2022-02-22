@@ -4,6 +4,8 @@ import { GET_TASKS } from '../../query'
 
 import './TaskTable.scss'
 
+// TODO LE DISPLAY TABLE EST FINALEMENT PAS LE MIEUX EN RESPONSIVE PLUTOT PASSER A DU GRID
+
 const TasksTable: React.FC = () => {
   const response = useQuery(GET_TASKS)
 

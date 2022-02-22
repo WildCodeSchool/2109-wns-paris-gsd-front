@@ -25,7 +25,7 @@
 
 //box
 @mixin box {
-  border: 1px var(--text-color) solid;
+  border: 2px var(--text-color) solid;
   border-radius: $radius-small;
   box-shadow: $shadow-regular;
 }

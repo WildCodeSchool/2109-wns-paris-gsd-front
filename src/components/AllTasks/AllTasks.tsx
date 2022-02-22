@@ -1,10 +1,15 @@
-import TasksTable from '../TasksTable/TasksTable'
+import TasksTable from '../TasksTable/TasksTable';
 import Header from '../Header/Header';
+import Nav from '../Nav/Nav';
+import './AllTasks.scss';
 
 const AllTasks: React.FC = () => (
   <>
     <Header />
-    <TasksTable />
+    <div className="alltasks_container">
+      <Nav />
+      <TasksTable />
+    </div>
   </>
 )
 
