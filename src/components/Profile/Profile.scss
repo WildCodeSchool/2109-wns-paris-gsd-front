@@ -1,0 +1,33 @@
+@import '../../style/vars';
+
+.profile_container {
+  display: flex;
+  height: 28px;
+  align-items: center;
+  gap: 12px;
+
+  .profile_image {
+    border-radius: $radius-round;
+    width: 34px;
+    padding: 6px;
+    box-shadow: $shadow-profile;
+  }
+
+  .profile_name {
+    text-decoration: underline;
+    font-weight: 400;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    &:after {
+      content: '';
+      display: block;
+      height: 12px;
+      width: 18px;
+      background-image: url('../../assets/img/dropdown.svg');
+      background-repeat: no-repeat;
+    }
+  }
+}

@@ -1,7 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import './App.scss'
 import useLocalStorage from 'use-local-storage'
-import Login from '../Login/Login'
 import AllTasks from '../AllTasks/AllTasks'
 
 const App: React.FC = () => {
@@ -17,14 +16,15 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="app" data-theme={theme}>
-      <Routes>
-        <Route path="/" element={<AllTasks />} />
-        <Route path="/dashboard" element={<Login />} />
-      </Routes>
-      <button className="toggle-button" onClick={switchTheme}>
-        {theme} mode
-      </button>
+    <div className="app main-container" data-theme={theme}>
+      <div className="main_wrapper">
+        <Routes>
+          <Route path="/" element={<AllTasks />} />
+        </Routes>
+        <button className="toggle-button" onClick={switchTheme}>
+          {theme} mode
+        </button>
+      </div>
     </div>
   )
 }
