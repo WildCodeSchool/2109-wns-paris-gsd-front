@@ -1,6 +1,6 @@
 /**
  * Global variables
- * =================================
+ * ======================
  * - Generic colors
  * - Color scheme
  * - Links
@@ -11,66 +11,55 @@
  * - Any others..
  */
 
-
-
 // Generic colors
-$yellow                 : #f4bf42;
-$red                    : #ea3358;
-$blue                   : #5dcffa;
-$pink                   : #ef89c3;
-$green                  : #21AB38;
-$electricblue           : #4269F4;
+$color-yellow-task: #f4bf42;
+$color-red-project: #ea3358;
+$color-blue-user: #5dcffa;
+$color-blue-admin: #5daffa;
+$color-pink-status: #ef89c3;
+$color-green-deadline: #21ab38;
+$color-blue-advancement: #4269f4;
+$color-purple-comment: #9042f4;
+$color-orange-assets: #f48242;
 
 // Color Scheme
-$primary                : #000;
-$secondary              : #000 ;
-$highlight              : #FFF;
+$color-black: #000;
+$color-white: #fff;
 
 // Links
-$link-default           : $highlight;
-$link-visilted          : $link-default;
-$link-hover             : darken($link-default, 20%);
-$link-active            : darken($link-default, 20%);
+$link-default: $color-white;
+$link-visilted: $link-default;
+$link-hover: darken($link-default, 20%);
+$link-active: darken($link-default, 20%);
 
 // Text Selection
-$color-selection        : #fff;
-$color-selection-bg     : $primary;
+$color-selection: $color-white;
+$color-selection-bg: $color-black;
+
+// Font-sizes
+$font-size-nav: 18px;
+$font-size-single-task: 14px;
 
 // Shadows
-$shadow_regular         : 0px 11px 20px rgba(#121212, .4), 0px -4px 20px rgba(#121212, .4);
+$shadow-regular: 0px 4px 4px rgba(#000, .25);
+$shadow-nav-active: -1px 2px 0px 1px #000;
+$shadow-profile: 1px 2px 7px rgba(#000, .25);
+$shadow-fancy: 0px 11px 20px #E5E5E5, 0px -4px 20px #E5E5E5;
 
 // Border radius
-$radius_small           : 4px;
+$radius-small: 4px;
+$radius-round: 50%;
 
 // Breakpoints
- $breakpoints: (
-	narrow              : 400px,
-	mid                 : 750px,
-	wide                : 1000px,
-	huge                : 1250px
-);
-
-// Equivalent to min-width query
-// @include media(">mid") {
-// 	width: 50%;
-// }
-
-// Equivalent to min-width and max-width query
-// @include media(">narrow", "<=wide") {
-// 	width: 50%;
-// }
-
-// Equivalent to min-width
-// @include media(">200px") {
-// 	width: 50%;
-// }
+$breakpoint-s: 400px;
+$breakpoint-m: 750px;
+$breakpoint-l: 1000px;
+$breakpoint-xl: 1250px;
 
 
 // Containers
-
-$login_container: 546px;
+$container-login: 546px;
 
 // transition
-
-$regular_transition: all 200ms ease-in;
-$no_transition: all 100ms linear;
+$transition-regular: all 200ms ease-in;
+$transition-linear: all 100ms linear;

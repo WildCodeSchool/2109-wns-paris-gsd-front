@@ -1,6 +1,7 @@
 @import '_reset.scss';
 @import '_vars.scss';
 @import '_mixins.scss';
+@import '_theme.scss';
 
 body {
   font-family: Roboto, sans-serif;
@@ -9,14 +10,4 @@ body {
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
   min-height: 100%;
-}
-
-:root {
-  --bg-color: #fff;
-  --text-color: #121212;
-}
-
-[data-theme="dark"] {
-  --bg-color: #121212;
-  --text-color: #fff;
 }

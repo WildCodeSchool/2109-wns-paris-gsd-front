@@ -3,7 +3,7 @@ import { LOGIN_USER } from '../../query'
 import { useForm } from 'react-hook-form'
 import IFormInput from '../../interfaces/FormInput'
 import './Login.scss'
-import logo from '../../assets/eee.png'
+import logo from '../../assets/img/logo.png'
 
 const Login: React.FC = (): any => {
   // Lazy query for login user method

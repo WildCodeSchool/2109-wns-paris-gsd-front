@@ -21,3 +21,17 @@
   }
 
 }
+
+
+//box
+@mixin box {
+  border: 2px var(--text-color) solid;
+  border-radius: $radius-small;
+}
+
+// title
+@mixin title($color) {
+  -webkit-text-stroke: 3px var(--text-color);
+  color: color;
+  font-size: 24px;
+}

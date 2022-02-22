@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import './App.scss'
 import useLocalStorage from 'use-local-storage'
 import Login from '../Login/Login'
-import Dashboard from '../Dashboard/Dasboard'
+import AllTasks from '../AllTasks/AllTasks'
 
 const App: React.FC = () => {
   const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches
@@ -19,8 +19,7 @@ const App: React.FC = () => {
   return (
     <div className="app" data-theme={theme}>
       <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/" element={<AllTasks />} />
         <Route path="/dashboard" element={<Login />} />
       </Routes>
       <button className="toggle-button" onClick={switchTheme}>

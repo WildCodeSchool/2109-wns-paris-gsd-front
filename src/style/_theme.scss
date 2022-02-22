@@ -1,0 +1,11 @@
+// IMPORTANT DO NOT TOUCH
+// THIS ROOT VARIABLES ARE IN CHARGE OF GLOBAL THEME OF ENTIRE APPLICATION
+:root {
+  --bg-color: #fff;
+  --text-color: #121212;
+}
+
+[data-theme="dark"] {
+  --bg-color: #121212;
+  --text-color: #fff;
+}
