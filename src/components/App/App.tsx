@@ -16,15 +16,17 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="app main-container" data-theme={theme}>
-      <div className="main_wrapper">
-        <Routes>
-          <Route path="/" element={<AllTasks />} />
-        </Routes>
-        <button className="toggle-button" onClick={switchTheme}>
-          {theme} mode
-        </button>
-      </div>
+    <div className="app" data-theme={theme}>
+      <main className="main_container">
+        <div className="main_wrapper">
+          <Routes>
+            <Route path="/" element={<AllTasks />} />
+          </Routes>
+          <button className="toggle-button" onClick={switchTheme}>
+            {theme} mode
+          </button>
+        </div>
+      </main>
     </div>
   )
 }

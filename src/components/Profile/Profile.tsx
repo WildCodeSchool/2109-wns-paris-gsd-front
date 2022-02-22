@@ -1,5 +1,6 @@
 import './Profile.scss';
-import poopie from '../../assets/img/goodpoopie.png'
+import poopie from '../../assets/img/goodpoopie.png';
+import DropdownIcon from '../SVG/DropDownIcon';
 
 const Profile: React.FC = () => (
   <div className="profile_container">
@@ -7,6 +8,7 @@ const Profile: React.FC = () => (
       <img src={poopie} alt="po" />
     </div>
     <div className="profile_name">Valentaing</div>
+    <DropdownIcon />
   </div>
 )
 

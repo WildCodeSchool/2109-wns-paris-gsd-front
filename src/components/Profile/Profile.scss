@@ -5,11 +5,13 @@
   height: 28px;
   align-items: center;
   gap: 12px;
+  cursor: pointer;
 
   .profile_image {
     border-radius: $radius-round;
     width: 34px;
     padding: 6px;
+    background-color: $color-white;
     box-shadow: $shadow-profile;
   }
 
@@ -20,14 +22,5 @@
     display: flex;
     align-items: center;
     gap: 6px;
-
-    &:after {
-      content: '';
-      display: block;
-      height: 12px;
-      width: 18px;
-      background-image: url('../../assets/img/dropdown.svg');
-      background-repeat: no-repeat;
-    }
   }
 }
