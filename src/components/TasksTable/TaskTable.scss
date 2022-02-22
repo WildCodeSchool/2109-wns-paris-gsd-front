@@ -1,0 +1,54 @@
+@import '../../style/vars';
+@import '../../style/mixins';
+
+.task_table_container {
+  @include box();
+
+  .task_table {
+    border-collapse: collapse;
+    width: 100%;
+
+    & th, td {
+      border: 1px solid var(--text-color);
+      text-align: center;
+    }
+
+    & th {
+      padding: 28px 40px;
+    }
+
+    & td {
+      padding: 14px 20px;
+    }
+    
+    & tbody > tr:nth-child(even) {
+        background-color: $color-pink-even-table
+    }
+
+    .task_table_header_item {
+      &--task {
+        @include title($color-yellow-task);
+      }
+
+      &--project {
+        @include title($color-red-project);
+      }
+
+      &--status {
+        @include title($color-pink-status);
+      }
+
+      &--assignee {
+        @include title($color-blue-user);
+      }
+
+      &--deadline {
+        @include title($color-green-deadline);
+      }
+
+      &--progression {
+        @include title($color-blue-progression);
+      }
+    }
+  }
+}
