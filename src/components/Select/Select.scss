@@ -1,0 +1,23 @@
+@import '../../style/vars';
+@import '../../style/mixins';
+
+.select_container {
+  position: relative;
+  .select {
+    @include box();
+    padding: 14px 26px 14px 10px;
+    font-size: 16px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    outline: 0;
+    cursor: pointer;
+    appearance: none;
+  }
+  .dropdown_icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-46%);
+    pointer-events: none;
+  }
+}

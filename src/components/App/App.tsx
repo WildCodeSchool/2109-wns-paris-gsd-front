@@ -23,7 +23,7 @@ const App: React.FC = () => {
             <Route path="/" element={<AllTasks />} />
           </Routes>
           <button className="toggle-button" onClick={switchTheme}>
-            {theme} mode
+            You are in {theme} mode
           </button>
         </div>
       </main>

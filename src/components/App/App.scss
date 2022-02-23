@@ -1,3 +1,6 @@
+@import '../../style/vars';
+@import '../../style/mixins';
+
 .app {
   background-color: var(--bg-color);
   color: var(--text-color);
@@ -16,7 +19,11 @@
 }
 
 .toggle-button {
+  @include box();
   position: absolute;
+  padding: 6px;
+  background-color: var(--bg-color);
+  color: var(--text-color);
   right: 0;
-  bottom: -80px;
+  bottom: 0;
 }
