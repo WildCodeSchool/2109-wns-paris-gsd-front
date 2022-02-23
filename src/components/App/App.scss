@@ -12,4 +12,11 @@
 
 .main_wrapper {
   margin: 0 36px;
+  position: relative;
+}
+
+.toggle-button {
+  position: absolute;
+  right: 0;
+  bottom: -80px;
 }

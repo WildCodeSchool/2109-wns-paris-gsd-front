@@ -1,54 +1,46 @@
 @import '../../style/vars';
 @import '../../style/mixins';
 
-.task_table_container {
+.task_table {
   @include box();
-  margin-left: 10px;
+  border-collapse: collapse;
+  width: 100%;
 
-  .task_table {
-    border-collapse: collapse;
+  & th,
+  td {
+    border: 1px solid var(--text-color);
+    text-align: center;
+    vertical-align: middle;
+    padding: 20px 10px;
+  }
 
-    & th, td {
-      border: 1px solid var(--text-color);
-      text-align: center;
+  & tbody > tr:nth-child(even) {
+    background-color: $color-pink-even-table;
+  }
+
+  .task_table_header_item {
+    &--task {
+      @include title($color-yellow-task);
     }
 
-    & th {
-      padding: 28px 40px;
+    &--project {
+      @include title($color-red-project);
     }
 
-    & td {
-      padding: 14px 20px;
-    }
-    
-    & tbody > tr:nth-child(even) {
-        background-color: $color-pink-even-table
+    &--status {
+      @include title($color-pink-status);
     }
 
-    .task_table_header_item {
-      &--task {
-        @include title($color-yellow-task);
-      }
+    &--assignee {
+      @include title($color-blue-user);
+    }
 
-      &--project {
-        @include title($color-red-project);
-      }
+    &--deadline {
+      @include title($color-green-deadline);
+    }
 
-      &--status {
-        @include title($color-pink-status);
-      }
-
-      &--assignee {
-        @include title($color-blue-user);
-      }
-
-      &--deadline {
-        @include title($color-green-deadline);
-      }
-
-      &--progression {
-        @include title($color-blue-progression);
-      }
+    &--progression {
+      @include title($color-blue-progression);
     }
   }
 }

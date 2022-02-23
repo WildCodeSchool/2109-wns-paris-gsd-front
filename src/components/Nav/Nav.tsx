@@ -4,7 +4,6 @@ import RedStar from '../../assets/img/red-star.png'
 import BlueStar from '../../assets/img/blue-star.png'
 import { NavLink } from 'react-router-dom'
 
-
 // TODO: gérer le style active
 const Nav: React.FC = () => (
   <nav className="nav">
