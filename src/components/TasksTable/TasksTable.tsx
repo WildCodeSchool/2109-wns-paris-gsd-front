@@ -13,6 +13,7 @@ const TasksTable: React.FC = () => {
 
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error...</p>
+
   return (
     <div className="task_table_container">
       <table className="task_table">
@@ -27,22 +28,19 @@ const TasksTable: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td className="task_table_row_item">Cleaner les logs</td>
-            <td className="task_table_row_item">Proctofrance</td>
-            <td className="task_table_row_item">New</td>
-            <td className="task_table_row_item">Valentaing</td>
-            <td className="task_table_row_item">11/03/2022</td>
-            <td className="task_table_row_item">25</td>
-          </tr>
-          <tr>
-            <td className="task_table_row_item">Cleaner les logs</td>
-            <td className="task_table_row_item">Proctofrance</td>
-            <td className="task_table_row_item">New</td>
-            <td className="task_table_row_item">Valentaing</td>
-            <td className="task_table_row_item">11/03/2022</td>
-            <td className="task_table_row_item">25</td>
-          </tr>
+          {data.getTasks.map((task: ITask) => (
+            <tr key={task.id} className="task">
+              <td className="task_table_row_item">{task.title}</td>
+              <td className="task_table_row_item">
+                {task.project ? task.project.name : undefined}
+              </td>
+              <td className="task_table_row_item">{task.status}</td>
+              <td className="task_table_row_item">Toto</td>
+              {/* <td className="task_table_row_item">{task.ending_time?.toISOString()}</td> */}
+              <td className="task_table_row_item">{task.ending_time}</td>
+              <td className="task_table_row_item">{task.advancement}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
       <Filters />
@@ -51,15 +49,3 @@ const TasksTable: React.FC = () => {
 }
 
 export default TasksTable
-
-{
-  /* {data.getTasks.map((task: ITask) => (
-        <tr key={task.id} className="task">
-          <td>{task.title}</h2>
-          <h2>{task.description}</h2>
-          <h2>{task.estimated_time}</h2>
-          <h2>tache cree par: </h2>
-          <h2>username: {task.taskCreator?.username} - role: {task.taskCreator?.role?.label}</h2>          
-        </div>
-      ))} */
-}
