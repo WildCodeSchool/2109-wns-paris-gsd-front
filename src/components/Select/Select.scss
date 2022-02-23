@@ -3,6 +3,7 @@
 
 .select_container {
   position: relative;
+
   .select {
     @include box();
     padding: 14px 26px 14px 10px;
@@ -13,6 +14,7 @@
     cursor: pointer;
     appearance: none;
   }
+
   .dropdown_icon {
     position: absolute;
     right: 10px;

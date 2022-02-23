@@ -54,8 +54,8 @@ export default TasksTable
 
 {
   /* {data.getTasks.map((task: ITask) => (
-        <div key={task.id} className="task">
-          <h2>{task.title}</h2>
+        <tr key={task.id} className="task">
+          <td>{task.title}</h2>
           <h2>{task.description}</h2>
           <h2>{task.estimated_time}</h2>
           <h2>tache cree par: </h2>
