@@ -1,4 +1,4 @@
-import ITask from "./Task";
+import {ITask} from "./Task";
 import IUser from "./User";
 
 export default interface IProject {

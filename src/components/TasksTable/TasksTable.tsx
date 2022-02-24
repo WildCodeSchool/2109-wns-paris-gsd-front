@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import ITask from '../../interfaces/Task'
+import { ITask, StatusName } from '../../interfaces/Task'
 
 import { useQuery } from '@apollo/client'
 
@@ -12,34 +12,37 @@ import './TaskTable.scss'
 export interface IDefaultSelectValue {
   project: string;
   tasksDone: boolean;
+  myTasks: boolean;
 }
 
-const DEFAULT_SELECT_VALUE: IDefaultSelectValue  = {
+const DEFAULT_SELECT_VALUE: IDefaultSelectValue = {
   project: 'All projects',
-  tasksDone: false
-};
+  tasksDone: false,
+  myTasks: false,
+}
 
 const TasksTable: React.FC = () => {
-  
   const [listProject, setListProject] = useState([])
-  const [selectedTaskFilterOptions, setSelectedTaskFilterOptions] = useState<IDefaultSelectValue>({...DEFAULT_SELECT_VALUE})
+  const [selectedTaskFilterOptions, setSelectedTaskFilterOptions] =
+    useState<IDefaultSelectValue>({ ...DEFAULT_SELECT_VALUE })
   const [filteredTasks, setFilteredTasks] = useState<ITask[]>([])
 
   const response = useQuery(GET_TASKS)
-  const { loading, error, data } = response;
-
-
-
+  const { loading, error, data } = response
 
   useEffect(() => {
     if (data) {
       const initlistProject = () => {
-        const taskProjectNames   = data.getTasks.map((task: ITask) => task.project.name);
-        const taskProjectNamesSorted = taskProjectNames.filter((item: string, index: number) => {
-          return taskProjectNames.indexOf(item) == index;
-        })
+        const taskProjectNames = data.getTasks.map(
+          (task: ITask) => task.project.name
+        )
+        const taskProjectNamesSorted = taskProjectNames.filter(
+          (item: string, index: number) => {
+            return taskProjectNames.indexOf(item) == index
+          }
+        )
         taskProjectNamesSorted.unshift(DEFAULT_SELECT_VALUE.project)
-        setListProject(taskProjectNamesSorted);
+        setListProject(taskProjectNamesSorted)
         setFilteredTasks([...data.getTasks])
       }
       initlistProject()
@@ -48,23 +51,21 @@ const TasksTable: React.FC = () => {
 
 
   useEffect(() => {
+    if (!data) return
 
-    if (!data)
-      return
+        const tasksBySelectedProject = data.getTasks
+        .filter(
+          (task: ITask) =>
+            selectedTaskFilterOptions.project === DEFAULT_SELECT_VALUE.project ? true : (task.project?.name === selectedTaskFilterOptions.project)
+        )
+        .filter((task: ITask) =>
+          selectedTaskFilterOptions.tasksDone === false ? true : task.status !== StatusName.DONE
+        )
+        
+    setFilteredTasks(tasksBySelectedProject)
 
-    if (selectedTaskFilterOptions.project === DEFAULT_SELECT_VALUE.project) {
-      setFilteredTasks([...data.getTasks]);
-      console.log(selectedTaskFilterOptions.project)
-      
-    } else {
-      console.log('prout')
-      const tasksBySelectedProject = data.getTasks.filter((task: ITask)  => task.project?.name === selectedTaskFilterOptions.project)
-      setFilteredTasks(tasksBySelectedProject)
-      console.log(selectedTaskFilterOptions);
-    }
-  }, [data, selectedTaskFilterOptions]);
- 
-  
+  }, [data, selectedTaskFilterOptions])
+
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error...</p>
 
@@ -101,9 +102,19 @@ const TasksTable: React.FC = () => {
           })}
         </tbody>
       </table>
-      <Filters listOptions={listProject} selectedOption={selectedTaskFilterOptions} setSelectedOption={setSelectedTaskFilterOptions}/>
+      <Filters
+        listOptions={listProject}
+        selectedOption={selectedTaskFilterOptions}
+        setSelectedOption={setSelectedTaskFilterOptions}
+      />
     </div>
   )
 }
 
 export default TasksTable
+
+// NEW = #fff
+// IN_PROGRESS = F4BF42
+// PENDING_REVIEW = F48242
+// DONE = 21AB38
+// REJECTED = #EA3358

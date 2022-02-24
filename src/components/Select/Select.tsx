@@ -13,6 +13,7 @@ const Select: React.FC<ISelect> = ({
     setSelectedOption({
       project: event.currentTarget.value,
       tasksDone: selectedOption.tasksDone,
+      myTasks: selectedOption.myTasks,
     })
   }
 

@@ -13,8 +13,8 @@ export interface IFilters {
 const Filters: React.FC<IFilters> = (props) => (
   <div className="filters_container">
     {props.listOptions.length && <Select {...props} />}
-    <Checkbox value="myTasks" label="Show my tasks" />
-    <Checkbox value="tasksDone" label="Hide done tasks" />
+    <Checkbox value="myTasks" label="Show my tasks" {...props} />
+    <Checkbox value="tasksDone" label="Hide done tasks" {...props} />
   </div>
 )
 
