@@ -8,6 +8,9 @@ export const GET_TASKS = gql`
       project{
         name
       }
+      taskCreator{
+        username
+      }
       advancement
       status
       description
