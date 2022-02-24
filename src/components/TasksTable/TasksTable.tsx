@@ -49,14 +49,16 @@ const TasksTable: React.FC = () => {
     }
   }, [data])
 
-  
-
   useEffect(() => {
     const filterByName = (task: ITask) =>
-      selectedTaskFilterOptions.project === DEFAULT_SELECT_VALUE.project ? true : (task.project?.name === selectedTaskFilterOptions.project);
+      selectedTaskFilterOptions.project === DEFAULT_SELECT_VALUE.project
+        ? true
+        : task.project?.name === selectedTaskFilterOptions.project
 
     const filterByTaskDone = (task: ITask) =>
-      selectedTaskFilterOptions.tasksDone === false ? true : task.status !== StatusName.DONE;
+      selectedTaskFilterOptions.tasksDone === false
+        ? true
+        : task.status !== StatusName.DONE
 
     if (data) {
       const tasksBySelectedProject = data.getTasks
@@ -64,8 +66,6 @@ const TasksTable: React.FC = () => {
         .filter(filterByTaskDone)
       setFilteredTasks(tasksBySelectedProject)
     }
-        
-
   }, [data, selectedTaskFilterOptions])
 
   if (loading) return <p>Loading...</p>
