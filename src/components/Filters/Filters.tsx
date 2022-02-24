@@ -2,11 +2,12 @@ import './Filters.scss'
 import Checkbox from '../CheckBox/Checkbox'
 import Select from '../Select/Select'
 import { Dispatch, SetStateAction } from 'react'
+import { IDefaultSelectValue } from '../TasksTable/TasksTable'
 
 export interface IFilters {
   listOptions: string[];
-  selectedOption: string;
-  setSelectedOption: Dispatch<SetStateAction<string>>;
+  selectedOption: IDefaultSelectValue;
+  setSelectedOption: Dispatch<SetStateAction<IDefaultSelectValue>>;
 }
 
 const Filters: React.FC<IFilters> = (props) => (

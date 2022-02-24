@@ -9,12 +9,20 @@ import Filters from '../Filters/Filters'
 
 import './TaskTable.scss'
 
+export interface IDefaultSelectValue {
+  project: string;
+  tasksDone: boolean;
+}
 
+const DEFAULT_SELECT_VALUE: IDefaultSelectValue  = {
+  project: 'All projects',
+  tasksDone: false
+};
 
 const TasksTable: React.FC = () => {
   
   const [listProject, setListProject] = useState([])
-  const [selectedProject, setSelectedProject] = useState('Tous les proyaits')
+  const [selectedTaskFilterOptions, setSelectedTaskFilterOptions] = useState<IDefaultSelectValue>({...DEFAULT_SELECT_VALUE})
   const [filteredTasks, setFilteredTasks] = useState<ITask[]>([])
 
   const response = useQuery(GET_TASKS)
@@ -30,7 +38,7 @@ const TasksTable: React.FC = () => {
         const taskProjectNamesSorted = taskProjectNames.filter((item: string, index: number) => {
           return taskProjectNames.indexOf(item) == index;
         })
-        taskProjectNamesSorted.unshift('Tous les proyaits')
+        taskProjectNamesSorted.unshift(DEFAULT_SELECT_VALUE.project)
         setListProject(taskProjectNamesSorted);
         setFilteredTasks([...data.getTasks])
       }
@@ -38,17 +46,24 @@ const TasksTable: React.FC = () => {
     }
   }, [data])
 
+
   useEffect(() => {
+
     if (!data)
       return
 
-    if (selectedProject === 'Tous les proyaits') {
+    if (selectedTaskFilterOptions.project === DEFAULT_SELECT_VALUE.project) {
       setFilteredTasks([...data.getTasks]);
+      console.log(selectedTaskFilterOptions.project)
+      
     } else {
-      const tasksBySelectedProject = data.getTasks.filter((task: ITask)  => task.project?.name === selectedProject)
+      console.log('prout')
+      const tasksBySelectedProject = data.getTasks.filter((task: ITask)  => task.project?.name === selectedTaskFilterOptions.project)
       setFilteredTasks(tasksBySelectedProject)
+      console.log(selectedTaskFilterOptions);
     }
-  }, [data, selectedProject]);
+  }, [data, selectedTaskFilterOptions]);
+ 
   
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error...</p>
@@ -86,7 +101,7 @@ const TasksTable: React.FC = () => {
           })}
         </tbody>
       </table>
-      <Filters listOptions={listProject} selectedOption={selectedProject} setSelectedOption={setSelectedProject}/>
+      <Filters listOptions={listProject} selectedOption={selectedTaskFilterOptions} setSelectedOption={setSelectedTaskFilterOptions}/>
     </div>
   )
 }
