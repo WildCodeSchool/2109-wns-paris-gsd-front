@@ -14,15 +14,17 @@ const Checkbox: React.FC<ICheckbox> = ({
   setSelectedOption,
 }) => {
   const handleChange = (): void => {
-    const newValue: IDefaultSelectValue = { ...selectedOption}
-    
+    // On passe l'objet d'option dans une nouvelle valeur
+    const newOptionsValue: IDefaultSelectValue = { ...selectedOption }
+    // si on veut les taches faites alors la value du checkbox est tasksDone
     if (value === 'tasksDone') {
-      newValue.tasksDone = !selectedOption.tasksDone;
+      newOptionsValue.tasksDone = !selectedOption.tasksDone
+      // sinon on veut uniquement mes taches
     } else {
-      newValue.myTasks = !selectedOption.myTasks;
+      newOptionsValue.myTasks = !selectedOption.myTasks
     }
-    
-    setSelectedOption(newValue)
+    // On passe les nouvelles options de filtres
+    setSelectedOption(newOptionsValue)
   }
   return (
     <div>

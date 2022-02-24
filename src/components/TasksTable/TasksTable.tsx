@@ -15,6 +15,7 @@ export interface IDefaultSelectValue {
   myTasks: boolean;
 }
 
+//  On crée un objet avec toutes les options de filtres par defaut
 const DEFAULT_SELECT_VALUE: IDefaultSelectValue = {
   project: 'All projects',
   tasksDone: false,
@@ -22,17 +23,21 @@ const DEFAULT_SELECT_VALUE: IDefaultSelectValue = {
 }
 
 const TasksTable: React.FC = () => {
-  const [listProject, setListProject] = useState([])
-  const [selectedTaskFilterOptions, setSelectedTaskFilterOptions] =
-    useState<IDefaultSelectValue>({ ...DEFAULT_SELECT_VALUE })
+  // toutes les taches recu par la db
+  const [Alltasks, setAlltasks] = useState([])
+  // l'objet contenant les options de tris
+  const [selectedTaskFilterOptions, setSelectedTaskFilterOptions] = useState<IDefaultSelectValue>({ ...DEFAULT_SELECT_VALUE })
+  // les options de tris
   const [filteredTasks, setFilteredTasks] = useState<ITask[]>([])
-
+  // query graphql
   const response = useQuery(GET_TASKS)
   const { loading, error, data } = response
 
   useEffect(() => {
     if (data) {
-      const initlistProject = () => {
+      // on recupere d'abord juste le nom de tous les projects qu'on va trier pour les afficher dans le select
+      // on va également ajouter le choix par defaut ('tous les projets') dans le tableau passé au select
+      const initListProjectsforSelect = () => {
         const taskProjectNames = data.getTasks.map(
           (task: ITask) => task.project.name
         )
@@ -42,25 +47,28 @@ const TasksTable: React.FC = () => {
           }
         )
         taskProjectNamesSorted.unshift(DEFAULT_SELECT_VALUE.project)
-        setListProject(taskProjectNamesSorted)
+        setAlltasks(taskProjectNamesSorted)
         setFilteredTasks([...data.getTasks])
       }
-      initlistProject()
+      initListProjectsforSelect()
     }
   }, [data])
 
   useEffect(() => {
+    // On recupere toutes les taches de la db qu'on va filtrer selon les options choisies
     const filterByName = (task: ITask) =>
+    // Selon le nom de projet
       selectedTaskFilterOptions.project === DEFAULT_SELECT_VALUE.project
         ? true
         : task.project?.name === selectedTaskFilterOptions.project
-
+    // Selon le statut de la tache
     const filterByTaskDone = (task: ITask) =>
       selectedTaskFilterOptions.tasksDone === false
         ? true
         : task.status !== StatusName.DONE
 
     if (data) {
+      // On applique les deux filters
       const tasksBySelectedProject = data.getTasks
         .filter(filterByName)
         .filter(filterByTaskDone)
@@ -105,7 +113,7 @@ const TasksTable: React.FC = () => {
         </tbody>
       </table>
       <Filters
-        listOptions={listProject}
+        listOptions={Alltasks}
         selectedOption={selectedTaskFilterOptions}
         setSelectedOption={setSelectedTaskFilterOptions}
       />
@@ -114,9 +122,3 @@ const TasksTable: React.FC = () => {
 }
 
 export default TasksTable
-
-// NEW = #fff
-// IN_PROGRESS = F4BF42
-// PENDING_REVIEW = F48242
-// DONE = 21AB38
-// REJECTED = #EA3358

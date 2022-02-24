@@ -9,6 +9,7 @@ const Select: React.FC<ISelect> = ({
   selectedOption,
   setSelectedOption,
 }) => {
+  // On ecoute le changement de valeur du select tout en lui appliquant la valeur des deux autres filtres grace à l'objet d'options
   const handleChange = (event: React.FormEvent<HTMLSelectElement>): void => {
     setSelectedOption({
       project: event.currentTarget.value,
