@@ -30,8 +30,7 @@ const TasksTable: React.FC = () => {
   // les options de tris
   const [filteredTasks, setFilteredTasks] = useState<ITask[]>([])
   // query graphql
-  const response = useQuery(GET_TASKS)
-  const { loading, error, data } = response
+  const { loading, error, data } = useQuery(GET_TASKS)
 
   useEffect(() => {
     if (data) {
@@ -56,7 +55,7 @@ const TasksTable: React.FC = () => {
 
   useEffect(() => {
     // On recupere toutes les taches de la db qu'on va filtrer selon les options choisies
-    const filterByName = (task: ITask) =>
+    const filterByProjectName = (task: ITask) =>
     // Selon le nom de projet
       selectedTaskFilterOptions.project === DEFAULT_SELECT_VALUE.project
         ? true
@@ -70,7 +69,7 @@ const TasksTable: React.FC = () => {
     if (data) {
       // On applique les deux filters
       const tasksBySelectedProject = data.getTasks
-        .filter(filterByName)
+        .filter(filterByProjectName)
         .filter(filterByTaskDone)
       setFilteredTasks(tasksBySelectedProject)
     }
