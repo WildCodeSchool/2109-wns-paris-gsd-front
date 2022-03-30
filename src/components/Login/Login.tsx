@@ -5,14 +5,13 @@ import IFormInput from '../../interfaces/FormInput'
 import './Login.scss'
 import logo from '../../assets/img/logo.png'
 
-const Login: React.FC = (): any => {
+const Login: React.FC = () => {
   // Lazy query for login user method
   const [loginUser, { loading, data: loginData, error }] = useLazyQuery(LOGIN_USER)
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
   } = useForm<IFormInput>()
 
   const onSubmit = handleSubmit(async (credentials) => {
@@ -21,7 +20,9 @@ const Login: React.FC = (): any => {
 
   if (loading) return <h2>it is loading my dudes!!!...</h2>;
   if (error) return <h2>{`Error: ${error}`}</h2>;
-  if (loginData) console.log(loginData);
+  if (loginData) {
+    localStorage.setItem("token", loginData.loginUser.token);
+  };
 
 
   return (
@@ -36,7 +37,6 @@ const Login: React.FC = (): any => {
           <img src={logo} alt="logo" />
         </div>
         <form onSubmit={onSubmit} className="login">
-          {/* <div> */}
           <input
             id="username"
             placeholder="username"
@@ -52,7 +52,6 @@ const Login: React.FC = (): any => {
             className="login_input"
             {...register("password")}
           />
-          {/* </div> */}
           <button type="submit" className="login_submit">
             Login
           </button>

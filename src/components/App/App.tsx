@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import './App.scss'
 import useLocalStorage from 'use-local-storage'
 import AllTasks from '../AllTasks/AllTasks'
+import Login from '../Login/Login';
 import Modal from '../Modal/Modal';
 import { useModal } from '../../hooks/hooks'
 
@@ -28,7 +29,8 @@ const App: React.FC = () => {
       <main className="main_container">
         <div className="main_wrapper">
           <Routes>
-            <Route path="/" element={<AllTasks />} />
+            <Route path="/" element={<Login />} />
+            <Route path="/home" element={<AllTasks />} />
           </Routes>
           <button className="toggle-button" onClick={switchTheme}>
             You are in {theme} mode
