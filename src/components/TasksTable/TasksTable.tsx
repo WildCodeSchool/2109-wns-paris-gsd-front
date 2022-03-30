@@ -8,6 +8,7 @@ import { GET_TASKS } from '../../query'
 import Filters from '../Filters/Filters'
 
 import './TaskTable.scss'
+import Table from '../Table/Table'
 
 export interface IDefaultSelectValue {
   project: string;
@@ -80,37 +81,28 @@ const TasksTable: React.FC = () => {
 
   return (
     <div className="task_table_container">
-      <table className="task_table">
-        <thead className="task_table_header">
-          <tr>
-            <th className="task_table_header_item--task">Task</th>
-            <th className="task_table_header_item--project">Project</th>
-            <th className="task_table_header_item--status">Status</th>
-            <th className="task_table_header_item--assignee">Assignee</th>
-            <th className="task_table_header_item--deadline">Deadline</th>
-            <th className="task_table_header_item--progression">%</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredTasks.map((task: ITask) => {
-            return (
-              <tr key={task.id} className="task">
-                <td className="task_table_row_item">{task.title}</td>
-                <td className="task_table_row_item">{task.project?.name}</td>
-                <td className="task_table_row_item">{task.status}</td>
-                <td className="task_table_row_item">
-                  {task.taskCreator?.username}
-                </td>
-                <td className="task_table_row_item">
-                  {/* ici on recoit une string time stamp qu'on doit parser en nombre */}
-                  {new Date(parseInt(task.ending_time)).toLocaleDateString()}
-                </td>
-                <td className="task_table_row_item">{task.advancement}</td>
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
+      <Table 
+        entity='task'
+        columns={['task', 'project', 'status', 'assignee', 'deadline', 'progression']}
+        data={filteredTasks}
+        displayData={(item : ITask) => {
+          return (
+            <tr key={item.id} className="task">
+              <td className={`task_table_row_item`}>{item.title}</td>
+              <td className={`task_table_row_item`}>{item.project?.name}</td>
+              <td className={`task_table_row_item`}>{item.status}</td>
+              <td className={`task_table_row_item`}>
+                {item.taskCreator?.username}
+              </td>
+              <td className={`task_table_row_item`}>
+                {/* ici on recoit une string time stamp qu'on doit parser en nombre */}
+                {new Date(parseInt(item.ending_time)).toLocaleDateString()}
+              </td>
+          <td className={`task_table_row_item`}>{item.advancement}</td>
+            </tr>
+          )
+        }}
+      />
       <Filters
         listOptions={Alltasks}
         selectedOption={selectedTaskFilterOptions}
