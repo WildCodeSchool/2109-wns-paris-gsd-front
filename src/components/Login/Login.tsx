@@ -1,14 +1,17 @@
 import { useLazyQuery } from '@apollo/client'
 import { LOGIN_USER } from '../../query'
 import { useForm } from 'react-hook-form'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import IFormInput from '../../interfaces/FormInput'
 import './Login.scss'
 import logo from '../../assets/img/logo.png'
 import EyeIcon from '../SVG/EyeIcon';
+import useAuth from '../../hooks/useAuth';
+
 
 const Login: React.FC = () => {
-
+  // 
+  const {login, user, loggedIn} = useAuth();
   const [passwordShown, setPasswordShown] = useState(false);
   // Lazy query for login user method
   const [loginUser, { loading, data: loginData, error }] = useLazyQuery(LOGIN_USER)
@@ -18,20 +21,21 @@ const Login: React.FC = () => {
     handleSubmit,
   } = useForm<IFormInput>()
 
+
   const onSubmit = handleSubmit(async (credentials) => {
-    loginUser({variables: { data: credentials }});
+    loginUser({variables: { data: credentials }}).then((res) => {
+      login(res.data.loginUser.token);
+    });
   });
 
   if (loading) return <h2>it is loading my dudes!!!...</h2>;
   if (error) return <h2>{`Error: ${error}`}</h2>;
   if (loginData) {
-    localStorage.setItem("token", loginData.loginUser.token);
-    console.log(loginData)
+    // localStorage.setItem("token", loginData.loginUser.token);
+    // console.log(loginData)
   };
 
   const togglePassword = () => {
-    // When the handler is invoked
-    // inverse the boolean state of passwordShown
     setPasswordShown(!passwordShown);
   };
 

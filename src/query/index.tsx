@@ -28,3 +28,56 @@ export const LOGIN_USER = gql`
     }
   }
 `
+
+export const GET_PROJECTS = gql`
+  query GetProjects {
+    getProjects {
+      id
+      name
+      starting_time
+      ending_time
+      tasks {
+        id
+        title
+        description
+        starting_time
+        ending_time
+        estimated_time
+        advancement
+        status
+      }
+      users {
+        id
+        firstName
+        lastName
+        username
+        email
+        role {
+          id
+          label
+        }
+      }
+    }
+  }
+`
+
+export const GET_PROJECT_BY_ID = gql`
+  query GetProjectById {
+    getProjectById {
+      id
+      name
+      tasks {
+        title
+        taskCreator {
+          userName
+        }
+        advancement
+        status
+        description
+        estimated_time
+        starting_time
+        ending_time
+      }
+    }
+  }
+`

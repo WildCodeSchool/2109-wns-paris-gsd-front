@@ -6,6 +6,8 @@ import './style/index.scss'
 
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client'
 import { setContext } from "@apollo/client/link/context";
+import { AuthProvider } from './hooks/useAuth';
+
 
 const httpLink = createHttpLink({
   uri: "http://localhost:8000/graphql",
@@ -28,9 +30,11 @@ const client = new ApolloClient({
 
 render(
   <ApolloProvider client={client}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+      <BrowserRouter>
+        <AuthProvider>
+          <App />
+        </AuthProvider>
+      </BrowserRouter>
   </ApolloProvider>,
   document.getElementById('root')
 )

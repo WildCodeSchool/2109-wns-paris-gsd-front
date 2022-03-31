@@ -1,6 +1,3 @@
-
-
-
 import TasksTable from '../TasksTable/TasksTable'
 import Header from '../Header/Header'
 import Nav from '../Nav/Nav'

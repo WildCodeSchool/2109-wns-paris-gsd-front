@@ -96,7 +96,7 @@ const TasksTable: React.FC = () => {
               </td>
               <td className={`task_table_row_item`}>
                 {/* ici on recoit une string time stamp qu'on doit parser en nombre */}
-                {new Date(parseInt(item.ending_time)).toLocaleDateString()}
+                {new Date(parseInt(item.ending_time)).toLocaleDateString('fr')}
               </td>
           <td className={`task_table_row_item`}>{item.advancement}</td>
             </tr>
