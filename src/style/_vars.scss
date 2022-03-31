@@ -45,7 +45,7 @@ $font-size-single-task: 14px;
 $shadow-regular: 0px 4px 4px rgba(#000, .25);
 $shadow-nav-active: -1px 2px 0px 1px #000;
 $shadow-profile: 1px 2px 7px rgba(#000, .25);
-$shadow-fancy: 0px 11px 20px #E5E5E5, 0px -4px 20px #E5E5E5;
+$shadow-fancy: 0px 11px 20px var(--shadow-color), 0px -4px 20px var(--shadow-color);
 
 // Border radius
 $radius-small: 4px;

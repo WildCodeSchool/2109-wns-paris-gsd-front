@@ -5,7 +5,8 @@ import { useEffect, useState } from 'react';
 import IFormInput from '../../interfaces/FormInput'
 import './Login.scss'
 import logo from '../../assets/img/logo.png'
-import EyeIcon from '../SVG/EyeIcon';
+import EyeOpenIcon from '../SVG/EyeOpenIcon';
+import EyeCloseIcon from '../SVG/EyeCloseIcon';
 import useAuth from '../../hooks/useAuth';
 
 
@@ -68,7 +69,8 @@ const Login: React.FC = () => {
               className="login_input"
               {...register("password")}
             />
-            <div className="login_password_toggle_button" onClick={togglePassword}><EyeIcon /></div>
+            <div className={!passwordShown ? "login_password_toggle_button--hidden" : 'login_password_toggle_button'} onClick={togglePassword}><EyeOpenIcon /></div>
+            <div className={passwordShown ? "login_password_toggle_button--hidden" : 'login_password_toggle_button'} onClick={togglePassword}><EyeCloseIcon /></div>
           </div>
           <button type="submit" className="login_submit">
             Login
