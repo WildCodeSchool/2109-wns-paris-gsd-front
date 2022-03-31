@@ -1,11 +1,15 @@
 import { useLazyQuery } from '@apollo/client'
 import { LOGIN_USER } from '../../query'
 import { useForm } from 'react-hook-form'
+import { useState } from 'react';
 import IFormInput from '../../interfaces/FormInput'
 import './Login.scss'
 import logo from '../../assets/img/logo.png'
+import EyeIcon from '../SVG/EyeIcon';
 
 const Login: React.FC = () => {
+
+  const [passwordShown, setPasswordShown] = useState(false);
   // Lazy query for login user method
   const [loginUser, { loading, data: loginData, error }] = useLazyQuery(LOGIN_USER)
 
@@ -22,6 +26,13 @@ const Login: React.FC = () => {
   if (error) return <h2>{`Error: ${error}`}</h2>;
   if (loginData) {
     localStorage.setItem("token", loginData.loginUser.token);
+    console.log(loginData)
+  };
+
+  const togglePassword = () => {
+    // When the handler is invoked
+    // inverse the boolean state of passwordShown
+    setPasswordShown(!passwordShown);
   };
 
 
@@ -44,14 +55,17 @@ const Login: React.FC = () => {
             required
             {...register("username")}
           />
-          <input
-            id="password"
-            type="password"
-            required
-            placeholder="password"
-            className="login_input"
-            {...register("password")}
-          />
+          <div className="login_password">
+            <input
+              id="password"
+              type={passwordShown ? "text" : "password"}
+              required
+              placeholder="password"
+              className="login_input"
+              {...register("password")}
+            />
+            <div className="login_password_toggle_button" onClick={togglePassword}><EyeIcon /></div>
+          </div>
           <button type="submit" className="login_submit">
             Login
           </button>
