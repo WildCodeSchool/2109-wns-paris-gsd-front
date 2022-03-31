@@ -2,10 +2,11 @@
 @import '../../style/mixins';
 
 .nav {
-  height: 150px;
+  // height: 150px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 20px;
+  // justify-content: space-between;
 
   .nav_link {
     display: flex;

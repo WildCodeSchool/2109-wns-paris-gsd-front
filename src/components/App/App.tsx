@@ -4,9 +4,9 @@ import useLocalStorage from 'use-local-storage'
 import AllTasks from '../AllTasks/AllTasks'
 import AllProjects from '../AllProjects/AllProjects'
 import Login from '../Login/Login';
-import Modal from '../Modal/Modal';
-import { useModal } from '../../hooks/hooks'
-import ProjectsTable from '../ProjectsTable/ProjectsTable';
+// import Modal from '../Modal/Modal';
+// import { useModal } from '../../hooks/hooks'
+// import ProjectsTable from '../ProjectsTable/ProjectsTable';
 import useAuth from '../../hooks/useAuth';
 import { useEffect } from 'react';
 import Users from '../Users/Users';
