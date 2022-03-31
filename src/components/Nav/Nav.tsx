@@ -11,7 +11,7 @@ const Nav: React.FC = () => {
 
   return (
       <nav className="nav">
-        <NavLink className="nav_link" to="/tasks">
+        <NavLink className="nav_link" to="/home">
           <div className="nav_link_icon">
             <img src={YellowStar} alt="yellow star" />
           </div>

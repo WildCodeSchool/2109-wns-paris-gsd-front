@@ -1,7 +1,6 @@
 import './Profile.scss';
 import poopie from '../../assets/img/goodpoopie.png';
 import DropdownIcon from '../SVG/DropDownIcon';
-import classnames from 'classnames';
 import useAuth from '../../hooks/useAuth';
 
 const Profile: React.FC = () => {
@@ -12,7 +11,7 @@ const Profile: React.FC = () => {
       <div className="profile_image">
         <img src={poopie} alt="po" />
       </div>
-      <div className="profile_name">{user?.username}</div>
+      <div className="profile_name">Hello {user?.username}</div>
       <div className="profile_logout">
         <DropdownIcon />
         <div className="profile_logout_box">
