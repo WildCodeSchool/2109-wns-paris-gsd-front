@@ -13,7 +13,12 @@ const Profile: React.FC = () => {
         <img src={poopie} alt="po" />
       </div>
       <div className="profile_name">{user?.username}</div>
-      <button style={{backgroundColor: 'black'}} onClick={() => logout()}><DropdownIcon /></button>
+      <div className="profile_logout">
+        <DropdownIcon />
+        <div className="profile_logout_box">
+          <button onClick={() => logout()}>Log out</button>
+        </div>
+      </div>
     </div>
   )
 }

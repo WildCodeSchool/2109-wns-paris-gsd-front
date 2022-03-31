@@ -23,4 +23,29 @@
     align-items: center;
     gap: 6px;
   }
+
+  .profile_logout {
+    position: relative;
+
+    .profile_logout_box {
+      position: absolute;
+      right: -10px;
+      top: 20px;
+      padding: 10px;
+      width: 100px;
+      height: 40px;
+      background-color: var(--bg-color);
+      border: 1px solid var(--text-color);
+      border-radius: $radius-small;
+      display: none;
+    }
+  }
+
+  &:hover {
+    .profile_logout {
+      .profile_logout_box {
+        display: block;
+      }
+    }
+  }
 }
