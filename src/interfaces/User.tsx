@@ -6,9 +6,9 @@ export default interface IUser {
     id?: number,
     firstName?: string,
     lastName?: string,
-    username?: string,
+    username: string,
     email?: string,
-    role?: IRole,
+    role: IRole,
     comments: [IComment],
     Tasks: [ITask]
 }

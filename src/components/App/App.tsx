@@ -45,9 +45,7 @@ const App: React.FC = () => {
            { user && <Route path="/projects" element={<AllProjects />} /> }
            { user?.role === 'ADMIN' && <Route path="/users" element={<Users />} /> }
           </Routes>
-          <button className="toggle-button" onClick={switchTheme}>
-            You are in {theme} mode
-          </button>
+         
           {/* <button className="modal-toggle" onClick={toggle}>
           Show modal
         </button> */}
@@ -59,6 +57,9 @@ const App: React.FC = () => {
           /> */}
         </div>
       </main>
+      <button className="toggle-button" onClick={switchTheme}>
+            You are in {theme} mode
+      </button>
     </div>
   )
 }

@@ -84,7 +84,7 @@ const TasksTable: React.FC = () => {
       <Table 
         entity='task'
         columns={['task', 'project', 'status', 'assignee', 'deadline', 'progression']}
-        data={filteredTasks}
+        data={[...filteredTasks].sort((a,b) => a.title.localeCompare(b.title))}
         displayData={(item : ITask) => {
           return (
             <tr key={item.id} className="task">
