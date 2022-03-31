@@ -12,7 +12,7 @@ export enum StatusName {
 
 export interface ITask {
   id?: number;
-  title?: string;
+  title: string;
   description?: string;
   project: IProject;
   advancement?: number;

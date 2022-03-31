@@ -81,3 +81,15 @@ export const GET_PROJECT_BY_ID = gql`
     }
   }
 `
+
+export const GET_USERS = gql`
+  query GetUsers {
+    getUsers {
+      id
+      username
+      role {
+        label
+      }
+    }
+  }
+`
