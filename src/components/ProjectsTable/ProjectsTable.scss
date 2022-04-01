@@ -22,10 +22,6 @@
 
     .project_table_header_item {
       &--project {
-        @include title($color-yellow-task);
-      }
-
-      &--project {
         @include title($color-red-project);
       }
 
@@ -33,16 +29,12 @@
         @include title($color-pink-status);
       }
 
-      &--assignee {
-        @include title($color-blue-user);
+      &--manager {
+        @include title($color-blue-admin);
       }
 
       &--deadline {
         @include title($color-green-deadline);
-      }
-
-      &--progression {
-        @include title($color-blue-progression);
       }
     }
   }
