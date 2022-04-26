@@ -1,0 +1,33 @@
+@import '../../style/vars';
+@import '../../style/mixins';
+
+.users_table_container {
+  width: 100%;
+
+  .users_table {
+    @include box();
+    border-collapse: separate;
+    width: 100%;
+
+    & th, td {
+      border: 1px solid var(--text-color);
+      text-align: center;
+      vertical-align: middle;
+      padding: 20px 10px;
+    }
+
+    & tbody > tr:nth-child(even) {
+      background-color: $color-pink-even-table;
+    }
+
+    .users_table_header_item {
+      &--member {
+        @include title($color-blue-user);
+      }
+
+      &--role {
+        @include title($color-blue-progression);
+      }
+    }
+  }
+}

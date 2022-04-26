@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
-import Tasks from '../components/Tasks/Tasks'
+import Tasks from '../components/TasksTable/TasksTable'
 import { MockedProvider } from '@apollo/client/testing'
 import { GET_TASKS } from '../query'
 import { GraphQLError } from 'graphql'

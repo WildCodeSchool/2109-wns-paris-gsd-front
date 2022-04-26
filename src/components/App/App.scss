@@ -1,5 +1,29 @@
+@import '../../style/vars';
+@import '../../style/mixins';
+
 .app {
   background-color: var(--bg-color);
   color: var(--text-color);
   min-height: 100vh;
+}
+
+
+.main_container {
+  max-width: 1360px;
+  margin: 0 auto;
+}
+
+.main_wrapper {
+  margin: 0 36px;
+  position: relative;
+}
+
+.toggle-button {
+  @include box();
+  position: absolute;
+  padding: 6px;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  right: 0;
+  bottom: 0;
 }

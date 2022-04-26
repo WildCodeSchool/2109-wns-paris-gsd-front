@@ -27,11 +27,14 @@
 @mixin box {
   border: 2px var(--text-color) solid;
   border-radius: $radius-small;
+  box-shadow: $shadow-regular;
 }
 
 // title
 @mixin title($color) {
-  -webkit-text-stroke: 3px var(--text-color);
-  color: color;
-  font-size: 24px;
+  -webkit-text-stroke: 1px var(--text-color);
+  color: $color;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 30px;
 }

@@ -1,0 +1,31 @@
+@import '../../style/vars';
+@import '../../style/mixins';
+
+.nav {
+  // height: 150px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  // justify-content: space-between;
+
+  .nav_link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .nav_link_icon {
+    width: 32px;
+  }
+
+  .nav_link_tab {
+    @include box ();
+    font-size: 18px;
+    display: block;
+    width: 140px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

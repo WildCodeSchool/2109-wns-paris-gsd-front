@@ -1,4 +1,5 @@
-@import '../../style/index.scss';
+@import '../../style/vars';
+@import '../../style/mixins';
 
 .asterisk {
   padding: 200px 0 40px;
@@ -31,6 +32,7 @@
   max-width: $container-login;
   margin: 0 auto;
   display: flex;
+  flex-direction: column;
   border: 2px var(--text-color) solid;
   border-radius: $radius-small;
   box-shadow: $shadow-fancy;
@@ -38,7 +40,24 @@
 
   .login {
     display: flex;
+    flex-direction: column;
+    margin: 20px auto;
     width: 75%;
+
+    &_password {
+      position: relative;
+
+      &_toggle_button {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        cursor: pointer;
+
+        &--hidden {
+          display: none;
+        }
+      }
+    }
 
     &_logo {
       width: 75%;
@@ -79,7 +98,7 @@
       font-size: .8rem;
       display: flex;
       justify-content: space-around;
-      margin-top: 17px;
+      margin: 17px auto 0;
 
       &_single {
         @include link-hover($transition-linear, 400);
