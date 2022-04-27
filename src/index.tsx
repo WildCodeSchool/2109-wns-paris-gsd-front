@@ -10,7 +10,7 @@ import { AuthProvider } from './hooks/useAuth';
 
 
 const httpLink = createHttpLink({
-  uri: "http://localhost:8000/graphql",
+  uri: "/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {
