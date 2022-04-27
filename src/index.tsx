@@ -28,6 +28,8 @@ const client = new ApolloClient({
   link: authLink.concat(httpLink),
 });
 
+console.log(authLink.concat(httpLink))
+
 render(
   <ApolloProvider client={client}>
       <BrowserRouter>
