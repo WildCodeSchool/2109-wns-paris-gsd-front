@@ -10,8 +10,6 @@ import { AuthProvider } from './hooks/useAuth';
 
 
 const httpLink = createHttpLink({
-  // uri: `${process.env.GRAPHL_SERVER_URL}/graphql`,
-  // uri: `https://staging.paris3-0921.wns.wilders.dev/graphql`,
   uri: `/graphql`,
 });
 

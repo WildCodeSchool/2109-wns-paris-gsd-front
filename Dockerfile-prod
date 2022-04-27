@@ -1,31 +1,15 @@
-FROM node:lts-alpine as builder
+FROM node:14.17.3-alpine
 
+RUN mkdir /app
 WORKDIR /app
 
-COPY tsconfig.json ./
 COPY package*.json ./
 
 RUN yarn
-RUN yarn global add typescript
 
-COPY src ./src
-COPY public ./public
+COPY tsconfig.json ./
+COPY public public
+COPY src src
 
-
-RUN yarn build
-
-FROM node:lts-alpine
-
-WORKDIR /app
-
-COPY --from=builder /app/build /app/build
-COPY --from=builder /app/public /app/public
-
-
-COPY package*.json ./
-
-RUN yarn install --production
-RUN yarn global add serve
-
-CMD serve -s build
+CMD yarn start
 
