@@ -43,7 +43,7 @@ const Login: React.FC = () => {
 
   return (
     <>
-    <div>Ciel, mes bijoux</div>
+    <div>Ciel, mes bijoux. - La Castafiore</div>
       <div className="asterisk">
         <div className="asterisk_single">*</div>
         <div className="asterisk_single">*</div>
