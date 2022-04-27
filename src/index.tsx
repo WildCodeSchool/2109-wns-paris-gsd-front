@@ -10,7 +10,7 @@ import { AuthProvider } from './hooks/useAuth';
 
 
 const httpLink = createHttpLink({
-  uri: "/graphql",
+  uri: `${process.env.GRAPHL_SERVER_URL}/graphql`,
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -27,8 +27,6 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: authLink.concat(httpLink),
 });
-
-console.log('kikou', authLink.concat(httpLink), httpLink)
 
 render(
   <ApolloProvider client={client}>
