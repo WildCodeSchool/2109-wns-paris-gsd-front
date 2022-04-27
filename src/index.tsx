@@ -28,7 +28,7 @@ const client = new ApolloClient({
   link: authLink.concat(httpLink),
 });
 
-console.log(authLink.concat(httpLink))
+console.log('kikou', authLink.concat(httpLink), httpLink)
 
 render(
   <ApolloProvider client={client}>
