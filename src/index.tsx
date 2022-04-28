@@ -23,8 +23,6 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
-console.log('kikou')
-
 const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: authLink.concat(httpLink),
