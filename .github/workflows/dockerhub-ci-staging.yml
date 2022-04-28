@@ -6,6 +6,19 @@ on:
       - 'staging'
 
 jobs:
+  stagingToMain:
+    runs-on: ubuntu-latest
+    steps:
+      - run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - uses: actions/checkout@v3
+      - name: Create Pull Request to main
+        uses: peter-evans/create-pull-request@v3.10.1
+        with:
+          commit-message: Auto Pull Request
+          title: Automated PR branch staging to Prod
+          body: After you valid the changes in staging environnement, just press the button, the production are to be released
+          branch: ${{ github.ref }} # The branch where you commit
+          base: main # Don't forget to specify the right base branch here
   docker:
     runs-on: ubuntu-latest
     steps:
