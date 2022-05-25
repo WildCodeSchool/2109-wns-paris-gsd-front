@@ -7,7 +7,21 @@ import { ADD_USER } from '../../query';
 import EyeCloseIcon from '../SVG/EyeCloseIcon';
 import EyeOpenIcon from '../SVG/EyeOpenIcon';
 import logo from '../../assets/img/logo.png';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
 
+const schema = yup.object({
+    username: yup.string().required(),
+    firstName: yup.string().required(),
+    lastName: yup.string().required(),
+    email: yup.string().email().required(),
+    password: yup.string()
+        .min(8, 'Password is too short - should be 8 chars minimum.')
+        .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*_])(?=.{8,})/, 'Password can only contain Latin letters.')
+        .required(),
+    passwordConfirmation: yup.string()
+    .oneOf([yup.ref('password'), null], 'Passwords must match')
+}).required();
 
 
 const Signup: React.FC = () => {
@@ -21,14 +35,18 @@ const Signup: React.FC = () => {
     const {
       register,
       handleSubmit,
-    } = useForm<ISignUpInput>()
+      formState: { errors: validErrors }
+    } = useForm<ISignUpInput>({
+        resolver: yupResolver(schema)
+    });
   
   
     const onSubmit = handleSubmit(async (signUpDatas) => {
         console.log(signUpDatas);
+            delete signUpDatas.passwordConfirmation;
            addUser({variables: { data: signUpDatas }}).then((res) => {
     //     //  login(res.data.loginUser.token);
-         console.log(res);
+            console.log(res);
       });
     });
   
@@ -63,6 +81,7 @@ const Signup: React.FC = () => {
               required
               {...register("username")}
             />
+             <p>{validErrors.username?.message}</p>
              <input
               id="firstName"
               placeholder="firstName"
@@ -70,6 +89,7 @@ const Signup: React.FC = () => {
               required
               {...register("firstName")}
             />
+            <p>{validErrors.firstName?.message}</p>
              <input
               id="lastName"
               placeholder="lastName"
@@ -77,6 +97,7 @@ const Signup: React.FC = () => {
               required
               {...register("lastName")}
             />
+            <p>{validErrors.lastName?.message}</p>
              <input
               id="email"
               placeholder="email"
@@ -85,6 +106,7 @@ const Signup: React.FC = () => {
               required
               {...register("email")}
             />
+            <p>{validErrors.email?.message}</p>
             <div className="login_password">
               <input
                 id="password"
@@ -97,19 +119,20 @@ const Signup: React.FC = () => {
               <div className={!passwordShown ? "login_password_toggle_button--hidden" : 'login_password_toggle_button'} onClick={togglePassword}><EyeOpenIcon /></div>
               <div className={passwordShown ? "login_password_toggle_button--hidden" : 'login_password_toggle_button'} onClick={togglePassword}><EyeCloseIcon /></div>
             </div>
-            {/* <div className="login_password">
+            <p>{validErrors.password?.message}</p>
+            <div className="login_password">
               <input
-                id="confirmPassword"
+                id="passwordConfirmation"
                 type={passwordShown ? "text" : "password"}
                 required
                 placeholder="confirm password"
                 className="login_input"
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                // {...register("password")}
+                {...register("passwordConfirmation")}
               />
               <div className={!passwordShown ? "login_password_toggle_button--hidden" : 'login_password_toggle_button'} onClick={togglePassword}><EyeOpenIcon /></div>
               <div className={passwordShown ? "login_password_toggle_button--hidden" : 'login_password_toggle_button'} onClick={togglePassword}><EyeCloseIcon /></div>
-            </div> */}
+            </div>
+            <p>{validErrors.passwordConfirmation?.message}</p>
             <button type="submit" className="login_submit">
               Login
             </button>

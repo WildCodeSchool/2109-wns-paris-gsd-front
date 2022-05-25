@@ -5,5 +5,5 @@ export default interface ISignUpInput {
     lastName: string;
     email: string;
     password: string;
-    // confirmPassword: string;
+    passwordConfirmation?: string;
   }
