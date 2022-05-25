@@ -93,3 +93,12 @@ export const GET_USERS = gql`
     }
   }
 `
+
+export const ADD_USER = gql`
+  mutation AddUser($data: UserInput!) {
+    addUser(data: $data) {
+    username
+      
+  }
+}
+`

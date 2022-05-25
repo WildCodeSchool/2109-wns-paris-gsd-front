@@ -1,4 +1,4 @@
-import { Routes, Route, useNavigate } from 'react-router-dom'
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
 import './App.scss'
 import useLocalStorage from 'use-local-storage'
 import AllTasks from '../AllTasks/AllTasks'
@@ -10,6 +10,7 @@ import Login from '../Login/Login';
 import useAuth from '../../hooks/useAuth';
 import { useEffect } from 'react';
 import Users from '../Users/Users';
+import Signup from '../SignUp/Signup'
 
 // const Content = () => {
 //   return (
@@ -30,10 +31,13 @@ const App: React.FC = () => {
 
   const { user } = useAuth()
   const navigate = useNavigate()
+  const location = useLocation()
 
   useEffect(() => {
-    console.log(user);
-  }, [user])
+    if(!user && location.pathname !== '/sign-up' && location.pathname !== '/') {
+      navigate('/')
+    }
+  }, [user, location, navigate])
 
   return (
     <div className="app" data-theme={theme}>
@@ -41,6 +45,7 @@ const App: React.FC = () => {
         <div className="main_wrapper">
           <Routes>
             <Route path="/" element={<Login />} />
+            <Route path="/sign-up" element={<Signup/>} />
            { user && <Route path="/home" element={<AllTasks />} />}
            { user && <Route path="/projects" element={<AllProjects />} /> }
            { user?.role === 'ADMIN' && <Route path="/users" element={<Users />} /> }

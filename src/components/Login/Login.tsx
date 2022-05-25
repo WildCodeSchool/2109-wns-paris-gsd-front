@@ -82,6 +82,9 @@ const Login: React.FC = () => {
             <a href="#" className="login_link_single">
               Forgot Password?
             </a>
+            <a href="/sign-up" className="login_link_single">
+              Not register ? Sign Up here !
+            </a>
           </div>
         </form>
       </div>

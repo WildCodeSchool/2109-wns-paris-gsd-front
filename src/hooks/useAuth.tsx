@@ -80,9 +80,9 @@ export function AuthProvider({
         if (token) {
             login(token);
             
-        } else {
-            navigate('/');
-        }
+        }// else {
+        //     navigate('/');
+        // }
 
     }, [])
 
