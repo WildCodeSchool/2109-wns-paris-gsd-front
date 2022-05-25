@@ -25,7 +25,8 @@ const Login: React.FC = () => {
 
   const onSubmit = handleSubmit(async (credentials) => {
     loginUser({variables: { data: credentials }}).then((res) => {
-      login(res.data.loginUser.token);
+      console.log(res);
+      login(res.data.loginUser);
     });
   });
 

@@ -24,7 +24,10 @@ export const GET_TASKS = gql`
 export const LOGIN_USER = gql`
   query LoginUser($data: LoginInput!) {
     loginUser(data: $data) {
-      token
+      username
+      role
+      userId
+      isConnected
     }
   }
 `

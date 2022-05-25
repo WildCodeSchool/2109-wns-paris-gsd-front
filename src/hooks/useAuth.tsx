@@ -18,12 +18,13 @@ type User = {
     username: string;
     role: string;
     userId: number;
+    isConnected: boolean; 
 } | null;
 
 interface AuthContextType {
     loggedIn: boolean;
     user?: User;
-    login: (token: string) => void;
+    login: (loginAnswer: User) => void;
     // signUp: (username: string, password: string) => void;
     logout: () => void;
 }
@@ -48,11 +49,12 @@ export function AuthProvider({
         username: string;
         role: string;
         userId: number;
+        isConnected: boolean;
     } | null>(null);
    
     const navigate = useNavigate()
 
-    function login(token: string) {
+    function login(loginAnswer: User) {
       // TODO make a call api
         //   loginUser({variables: {data: {username, password}}})
 
@@ -61,10 +63,11 @@ export function AuthProvider({
         //   }
     
         // decode the token
-        const payload: User = jwt_decode(token);
+        
+        
+        const payload: User = loginAnswer;
 
-        console.log(payload);
-        localStorage.setItem("token", token);
+        localStorage.setItem("connection", JSON.stringify(payload));
 
         // set the info from payload in state
         // set token in localStorage
@@ -75,10 +78,10 @@ export function AuthProvider({
     }
   
     useEffect(() => {
-        const token = localStorage.getItem('token');
+        const payload = JSON.parse(localStorage.getItem('connection') || "{}");
 
-        if (token) {
-            login(token);
+        if (payload && payload.isConnected) {
+            login(payload);
             
         }// else {
         //     navigate('/');
@@ -91,7 +94,7 @@ export function AuthProvider({
     //   vider local storage
         setUser(null);
         setLoggedIn(false);
-        localStorage.removeItem('token');
+        localStorage.removeItem('connection');
         navigate('/');
     }
   
