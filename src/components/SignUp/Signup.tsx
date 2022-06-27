@@ -3,10 +3,12 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form'
 // import useAuth from '../../hooks/useAuth';
 import ISignUpInput from '../../interfaces/SignupInput';
+import { useNavigate, Link } from 'react-router-dom';
 import { ADD_USER } from '../../query';
 import EyeCloseIcon from '../SVG/EyeCloseIcon';
 import EyeOpenIcon from '../SVG/EyeOpenIcon';
 import logo from '../../assets/img/logo.png';
+import './Signup.scss'
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 
@@ -16,8 +18,8 @@ const schema = yup.object({
     lastName: yup.string().required(),
     email: yup.string().email().required(),
     password: yup.string()
-        .min(8, 'Password is too short - should be 8 chars minimum.')
-        .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*_])(?=.{8,})/, 'Password can only contain Latin letters.')
+        .min(8,'password must be at least 8 characters long')
+        .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*_])(?=.{8,})/,'Password must contains a number, an uppercase letter and a special character')
         .required(),
     passwordConfirmation: yup.string()
     .oneOf([yup.ref('password'), null], 'Passwords must match')
@@ -28,13 +30,19 @@ const Signup: React.FC = () => {
 
     // const {login, user, loggedIn} = useAuth();
     const [passwordShown, setPasswordShown] = useState(false);
+    const [isSuccess, setIsSuccess] = useState(false);
+
     // const [confirmPassword, setConfirmPassword] = useState("");
     // Lazy query for login user method
-    const [addUser, { loading, data: signUpData, error }] = useMutation(ADD_USER)
+    const [addUser, { loading, data: signUpData, error }] = useMutation(ADD_USER);
+
+    const navigate = useNavigate();
+
   
     const {
       register,
       handleSubmit,
+      reset,
       formState: { errors: validErrors }
     } = useForm<ISignUpInput>({
         resolver: yupResolver(schema)
@@ -42,20 +50,21 @@ const Signup: React.FC = () => {
   
   
     const onSubmit = handleSubmit(async (signUpDatas) => {
-        console.log(signUpDatas);
             delete signUpDatas.passwordConfirmation;
-           addUser({variables: { data: signUpDatas }}).then((res) => {
-    //     //  login(res.data.loginUser.token);
-            console.log(res);
+           addUser({variables: { data: signUpDatas }}).then(() => {
+           setIsSuccess(true);
+           reset({
+            username: '',
+            firstName: '',
+            lastName: '',
+            email: '',
+            password: '',
+            passwordConfirmation: '',
+           })
       });
     });
   
-    if (loading) return <h2>it is loading my dudes!!!...</h2>;
-    if (error) return <h2>{`Error: ${error}`}</h2>;
-    // if (loginData) {
-      // localStorage.setItem("token", loginData.loginUser.token);
-      // console.log(loginData)
-    // };
+    if (loading) return <h2>it is loading !!!...</h2>;
   
     const togglePassword = () => {
       setPasswordShown(!passwordShown);
@@ -106,7 +115,7 @@ const Signup: React.FC = () => {
               required
               {...register("email")}
             />
-            <p>{validErrors.email?.message}</p>
+            <p className="login_error_message">{validErrors.email?.message}</p>
             <div className="login_password">
               <input
                 id="password"
@@ -119,7 +128,8 @@ const Signup: React.FC = () => {
               <div className={!passwordShown ? "login_password_toggle_button--hidden" : 'login_password_toggle_button'} onClick={togglePassword}><EyeOpenIcon /></div>
               <div className={passwordShown ? "login_password_toggle_button--hidden" : 'login_password_toggle_button'} onClick={togglePassword}><EyeCloseIcon /></div>
             </div>
-            <p>{validErrors.password?.message}</p>
+            <p className="login_error_message">{validErrors.password?.message}</p>
+            <p className="login_error_message">{validErrors.passwordConfirmation?.message}</p>
             <div className="login_password">
               <input
                 id="passwordConfirmation"
@@ -131,19 +141,13 @@ const Signup: React.FC = () => {
               />
               <div className={!passwordShown ? "login_password_toggle_button--hidden" : 'login_password_toggle_button'} onClick={togglePassword}><EyeOpenIcon /></div>
               <div className={passwordShown ? "login_password_toggle_button--hidden" : 'login_password_toggle_button'} onClick={togglePassword}><EyeCloseIcon /></div>
+              <p className="login_warning_message">Password must be at least 8 letters long and contains a number, an uppercase letter and a special character</p>
             </div>
-            <p>{validErrors.passwordConfirmation?.message}</p>
             <button type="submit" className="login_submit">
               Login
             </button>
-            <div className="login_link">
-              <a href="#" className="login_link_single">
-                Sign Up
-              </a>
-              {/* <a href="#" className="login_link_single">
-                Forgot Password?
-              </a> */}
-            </div>
+            {error &&  <h2 className="login_error_validation">{`Error: ${error}`}</h2>}
+            {isSuccess &&  <Link to={'/'}><h2 className="login_success_validation">Your account has been created you can sign in now</h2></Link>}
           </form>
         </div>
       </>
