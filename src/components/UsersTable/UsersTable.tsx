@@ -8,13 +8,10 @@ import DropdownIcon from '../SVG/DropDownIcon';
 import DeleteIcon from '../SVG/DeleteIcon';
 
 import './UsersTable.scss';
+import IRole from "../../interfaces/Role";
 
-export enum RoleName {
-  ADMIN = 'ADMIN',
-  MANAGER = 'MANAGER',
-  DEVELOPER = 'DEVELOPER',
-  USER = 'USER',
-}
+
+
 
 const UsersTable = () => {
     // query pour recupere les utilisateurs
@@ -48,6 +45,7 @@ const UsersTable = () => {
           columns={['member', 'role']}
           data={[...allUsers].sort((a, b) => a.username.localeCompare(b.username))}
           displayData={(user : IUser) => {
+            console.log(user);
             return (
               <tr key={user.id} className="users">
                 <td className={`users_table_row_item`}>{user.username}</td>
@@ -57,11 +55,11 @@ const UsersTable = () => {
                         className="select"
                         id="userRole"
                         name="userRole"
-                        defaultValue= {user.role.label}
+                        value={user.role.id}
                         onChange={handleChange}
                       >
-                        {roles.length && roles.map((item : any, key: number) => (
-                          <option key={item + '' + key} value={item.id} >
+                        {roles.length && roles.map((item : IRole, key: number) => (
+                          <option key={item + '' + key} value={item.id}>
                             {item.label}
                           </option>
                         ))}

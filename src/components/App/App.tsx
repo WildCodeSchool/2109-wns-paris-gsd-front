@@ -48,7 +48,7 @@ const App: React.FC = () => {
             <Route path="/sign-up" element={<Signup/>} />
            { user && <Route path="/home" element={<AllTasks />} />}
            { user && <Route path="/projects" element={<AllProjects />} /> }
-           { user?.role === 'ADMIN' && <Route path="/users" element={<Users />} /> }
+           { user?.role.label === 'ADMIN' && <Route path="/users" element={<Users />} /> }
           </Routes>
          
           {/* <button className="modal-toggle" onClick={toggle}>

@@ -27,6 +27,8 @@ const Login: React.FC = () => {
     loginUser({variables: { data: credentials }}).then((res) => {
       console.log(res);
       login(res.data.loginUser);
+    }).catch(e => {
+      console.log(e);
     });
   });
 

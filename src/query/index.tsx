@@ -25,7 +25,10 @@ export const LOGIN_USER = gql`
   query LoginUser($data: LoginInput!) {
     loginUser(data: $data) {
       username
-      role
+      role {
+        label
+        id
+      }
       userId
       isConnected
     }

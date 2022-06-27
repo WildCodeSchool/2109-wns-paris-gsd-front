@@ -14,9 +14,14 @@ import { useNavigate, useLocation } from "react-router-dom";
 // import { LOGIN_USER } from "../query";
 
 
+interface Role {
+  label:string;
+  id: number;
+}
+
 type User = {
     username: string;
-    role: string;
+    role: Role;
     userId: number;
     isConnected: boolean; 
 } | null;
@@ -47,7 +52,7 @@ export function AuthProvider({
     const [loggedIn, setLoggedIn] = useState<boolean>(false);
     const [user, setUser] = useState<{
         username: string;
-        role: string;
+        role: Role;
         userId: number;
         isConnected: boolean;
     } | null>(null);
