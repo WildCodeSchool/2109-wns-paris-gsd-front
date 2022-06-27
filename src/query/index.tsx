@@ -92,6 +92,7 @@ export const GET_USERS = gql`
       username
       role {
         label
+        id
       }
     }
   }
@@ -105,3 +106,25 @@ export const ADD_USER = gql`
   }
 }
 `
+
+export const GET_ROLES = gql`
+  query GetRoles {
+    getRoles {
+      id
+      label
+    }
+}
+`
+export const UPDATE_ROLE = gql`
+mutation UpdateUserRole($data: UpdateRoleInput!) {
+  updateUserRole(data: $data) {
+    role {
+      label
+    }
+  }
+}
+`
+// "data": {
+//   "userId": null,
+//   "roleId": null
+// }
