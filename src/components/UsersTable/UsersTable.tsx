@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
 
 import Table from "../Table/Table";
-import { GET_USERS, GET_ROLES } from "../../query";
+import { useMutation } from "@apollo/client";
+import { GET_USERS, GET_ROLES, UPDATE_USER_ROLE } from "../../query";
 import IUser from "../../interfaces/User";
 import DropdownIcon from '../SVG/DropDownIcon';
 import DeleteIcon from '../SVG/DeleteIcon';
@@ -20,10 +21,21 @@ const UsersTable = () => {
 
     const {loading, data, error } = useQuery(GET_USERS);
     const {loading: loadingRoles, data:dataRoles, error:errorRoles } = useQuery(GET_ROLES);
-
+    const [updateUserRole, { loading: loadingUpdateUserRole, data: newUserRole, error: errorUpdateUserRole }] = useMutation(UPDATE_USER_ROLE, { refetchQueries: [{ query: GET_USERS}] });
 
     const handleChange = (event:  React.ChangeEvent<HTMLSelectElement>) => {
-      console.log(event.target.value);
+      const roleId = event.target.value;
+      const userId = event.target.getAttribute('data-userid');
+
+      const variables = {
+          data: {
+        userId,
+        roleId,
+      }
+    }
+
+    updateUserRole({variables}).then(() => {
+    })
     }
 
     useEffect(() => {
@@ -31,7 +43,6 @@ const UsersTable = () => {
          setAllUsers(data.getUsers);
         }
         if (!loadingRoles && dataRoles) {
-          console.log(dataRoles);
           setRoles(dataRoles.getRoles);
         }
     }, [data, loading, loadingRoles, dataRoles])
@@ -45,17 +56,17 @@ const UsersTable = () => {
           columns={['member', 'role']}
           data={[...allUsers].sort((a, b) => a.username.localeCompare(b.username))}
           displayData={(user : IUser) => {
-            console.log(user);
             return (
               <tr key={user.id} className="users">
                 <td className={`users_table_row_item`}>{user.username}</td>
                 <td className={`users_table_row_item`}>
-                      <div className="select_container">
+                      <div className="select_container select_container--centered">
                       <select
                         className="select"
                         id="userRole"
                         name="userRole"
                         value={user.role.id}
+                        data-userid={user.id}
                         onChange={handleChange}
                       >
                         {roles.length && roles.map((item : IRole, key: number) => (

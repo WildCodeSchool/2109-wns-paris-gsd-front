@@ -4,7 +4,10 @@
 .select_container {
   position: relative;
   max-width: fit-content;
-  margin: 0 auto;
+
+  &--centered {
+    margin: 0 auto;
+  }
 
   .select {
     @include box();

@@ -118,7 +118,7 @@ export const GET_ROLES = gql`
     }
 }
 `
-export const UPDATE_ROLE = gql`
+export const UPDATE_USER_ROLE = gql`
 mutation UpdateUserRole($data: UpdateRoleInput!) {
   updateUserRole(data: $data) {
     role {
@@ -127,7 +127,3 @@ mutation UpdateUserRole($data: UpdateRoleInput!) {
   }
 }
 `
-// "data": {
-//   "userId": null,
-//   "roleId": null
-// }
