@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { ITask, StatusName } from '../../interfaces/Task'
 
 import { useQuery } from '@apollo/client'
-
+import useAuth from '../../hooks/useAuth';
 import { GET_TASKS } from '../../query'
 
 import Filters from '../Filters/Filters'
@@ -32,6 +32,9 @@ const TasksTable: React.FC = () => {
   const [filteredTasks, setFilteredTasks] = useState<ITask[]>([])
   // query graphql
   const { loading, error, data } = useQuery(GET_TASKS)
+  // user context 
+  const { user } = useAuth()
+
 
   useEffect(() => {
     if (data) {
@@ -66,12 +69,17 @@ const TasksTable: React.FC = () => {
       selectedTaskFilterOptions.tasksDone === false
         ? true
         : task.status !== StatusName.DONE
-
+    // Selon l'assigné de la tache
+    const filterByTaskAssignee = (task: ITask) =>
+      selectedTaskFilterOptions.myTasks === false
+        ? true
+        : task.taskCreator?.username == user?.username
     if (data) {
       // On applique les deux filters
       const tasksBySelectedProject = data.getTasks
         .filter(filterByProjectName)
         .filter(filterByTaskDone)
+        .filter(filterByTaskAssignee)
       setFilteredTasks(tasksBySelectedProject)
     }
   }, [data, selectedTaskFilterOptions])

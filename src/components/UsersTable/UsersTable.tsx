@@ -11,9 +11,6 @@ import DeleteIcon from '../SVG/DeleteIcon';
 import './UsersTable.scss';
 import IRole from "../../interfaces/Role";
 
-
-
-
 const UsersTable = () => {
     // query pour recupere les utilisateurs
     const [allUsers, setAllUsers] = useState<IUser[]>([]);
