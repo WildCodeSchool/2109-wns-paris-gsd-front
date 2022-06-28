@@ -31,8 +31,7 @@ const UsersTable = () => {
       }
     }
 
-    updateUserRole({variables}).then(() => {
-    })
+    updateUserRole({variables}).then()
     }
 
     useEffect(() => {

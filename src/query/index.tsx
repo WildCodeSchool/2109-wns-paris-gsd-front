@@ -67,6 +67,10 @@ export const GET_PROJECTS = gql`
   }
 `
 
+/**
+ * PROJECT QUERIES
+ */
+
 export const GET_PROJECT_BY_ID = gql`
   query GetProjectById {
     getProjectById {
@@ -87,6 +91,21 @@ export const GET_PROJECT_BY_ID = gql`
     }
   }
 `
+
+export const GET_PROJECT_MEMBERS = gql`
+query GetProjectById($getProjectByIdId: Float!) {
+  getProjectById(id: $getProjectByIdId) {
+    id
+    users {
+      username
+      id
+    }
+  }
+}
+`;
+// {
+//   "getProjectByIdId": null
+// }
 
 export const GET_USERS = gql`
   query GetUsers {
@@ -127,3 +146,25 @@ mutation UpdateUserRole($data: UpdateRoleInput!) {
   }
 }
 `
+export const TASK_BY_ID = gql`
+query GetTaskById($data: TaskIdInput!) {
+  getTaskById(data: $data) {
+    id
+    title
+    description
+    starting_time
+    ending_time
+    estimated_time
+    advancement
+    status
+    project {
+      id
+      name
+    }
+    taskCreator {
+      id
+      username
+    }
+  }
+}`
+

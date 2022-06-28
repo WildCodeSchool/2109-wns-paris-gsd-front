@@ -9,6 +9,10 @@
     border-collapse: separate;
     width: 100%;
 
+    & td {
+      cursor: pointer;
+    }
+
     & th, td {
       border: 1px solid var(--text-color);
       text-align: center;
