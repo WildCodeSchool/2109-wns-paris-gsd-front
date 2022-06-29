@@ -168,3 +168,9 @@ query GetTaskById($data: TaskIdInput!) {
   }
 }`
 
+export const CHANGE_ASSIGNEE = gql`
+mutation ChangeAssignee($data: ChangeAssigneeInput!) {
+  changeAssignee(data: $data) {
+    id
+  }
+}`;

@@ -29,7 +29,7 @@ const client = new ApolloClient({
   link: authLink.concat(httpLink),
   // link: httpLink,
   credentials: 'include',
-  
+
   // request: async operation => {
   //   operation.setContext({
   //     fetchOptions: {

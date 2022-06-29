@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client';
-import {ISingleTask} from '../../interfaces/SingleTask';
+import {ISingleTask} from '../../../interfaces/SingleTask';
 
 
 const SingleStatus: React.FC<ISingleTask> = ({status, advancement, estimated_time}) => {
