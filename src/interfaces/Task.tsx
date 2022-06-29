@@ -10,6 +10,14 @@ export enum StatusName {
   REJECTED = 'REJECTED',
 }
 
+export const statusList = [
+  'NEW',
+  'DONE',
+  'IN PROGRESS',
+  'PENDING REVIEW',
+  'REJECTED',
+]
+
 export interface ITask {
   id?: number;
   title: string;

@@ -40,7 +40,7 @@ const App: React.FC = () => {
             <Route path="/" element={<Login />} />
             <Route path="/sign-up" element={<Signup/>} />
            { user && <Route path="/home" element={<AllTasks theme={theme} />} />}
-           { user && <Route path="/projects" element={<AllProjects />} /> }
+           { user && <Route path="/projects" element={<AllProjects theme={theme}/>} /> }
            { user?.role.label === 'ADMIN' && <Route path="/users" element={<Users />} /> }
           </Routes>
         </div>

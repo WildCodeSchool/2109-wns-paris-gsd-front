@@ -21,6 +21,14 @@ export const GET_TASKS = gql`
   }
 `
 
+export const UPDATE_TASK = gql`
+  mutation UpdateTaskbyId($data: UpdateDeleteTaskInput!) {
+    updateTaskbyId(data: $data) {
+      id
+    }
+}
+`;
+
 export const LOGIN_USER = gql`
   query LoginUser($data: LoginInput!) {
     loginUser(data: $data) {
@@ -72,22 +80,24 @@ export const GET_PROJECTS = gql`
  */
 
 export const GET_PROJECT_BY_ID = gql`
-  query GetProjectById {
-    getProjectById {
+query GetProjectById($getProjectByIdId: Float!) {
+  getProjectById(id: $getProjectByIdId) {
       id
       name
-      tasks {
-        title
-        taskCreator {
-          userName
+      users {
+        username
+        id
+        role {
+          id
+          label
         }
-        advancement
-        status
-        description
-        estimated_time
-        starting_time
-        ending_time
+        email
       }
+      tasks {
+        id
+        title
+      }
+
     }
   }
 `
@@ -103,9 +113,6 @@ query GetProjectById($getProjectByIdId: Float!) {
   }
 }
 `;
-// {
-//   "getProjectByIdId": null
-// }
 
 export const GET_USERS = gql`
   query GetUsers {
