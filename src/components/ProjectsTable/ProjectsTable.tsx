@@ -57,7 +57,7 @@ const ProjectsTable: React.FC<ISingleProject> = ({theme}) => {
                 isShowing={isShowing}
                 hide={toggle}
                 theme={theme}
-                content={<SingleProject projectId={currentProjectId!} />}
+                content={<SingleProject projectId={currentProjectId as number} />}
             />
         </div>
     )

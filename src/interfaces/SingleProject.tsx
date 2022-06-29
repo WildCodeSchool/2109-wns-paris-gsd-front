@@ -7,6 +7,7 @@ export default interface ISingleProject {
     name?: string;
     status?: string;
     ending_time?: string;
+    starting_time?:string;
     users?: IUser[];
     tasks?: ITask[];
 }

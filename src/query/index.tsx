@@ -85,8 +85,8 @@ query GetProjectById($getProjectByIdId: Float!) {
       id
       name
       users {
-        username
         id
+        username
         role {
           id
           label
@@ -97,7 +97,8 @@ query GetProjectById($getProjectByIdId: Float!) {
         id
         title
       }
-
+      starting_time
+      ending_time
     }
   }
 `
