@@ -18,7 +18,7 @@ const SingleProject: React.FC<ISingleProject> = ({projectId}) => {
     useEffect(() => {
         if (projectId) {
             console.log(projectId)
-            getProjectbyId({variables: {getProjectByIdId: parseFloat(""+projectId)}}).then()
+            getProjectbyId({variables: {getProjectByIdId: parseFloat(""+projectId)}}).then((res) => console.log(res))
         }
     }, [getProjectbyId, projectId])
 
@@ -37,7 +37,6 @@ const SingleProject: React.FC<ISingleProject> = ({projectId}) => {
                     </>
                 )
         }
-        All the single projects
       </>
     )
   }
