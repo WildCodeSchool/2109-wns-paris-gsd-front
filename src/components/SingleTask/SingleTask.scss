@@ -1,0 +1,19 @@
+@import '../../style/vars';
+@import '../../style/mixins';
+
+.singleTask_box_container {
+  width: 60%;
+  margin: 0 auto;
+  display: flex;
+
+  .singleTask_box_column {
+    flex: 100%;
+    padding: 0 15px
+  }
+
+  .singleTask_box {
+    @include box();
+    border-collapse: separate;
+    width: 100%;
+  }
+}
