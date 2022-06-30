@@ -27,6 +27,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --coverage",
+    "test:ci": "react-scripts test --no-coverage",
     "eject": "react-scripts eject"
   },
   "browserslist": {
