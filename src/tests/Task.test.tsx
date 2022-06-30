@@ -10,7 +10,7 @@ describe('On component mount', () => {
     it('should render loading...', () => {
       render(
         <MockedProvider mocks={[]} addTypename={false}>
-          <Tasks />
+          <Tasks theme={'dark'}/>
         </MockedProvider>
       )
 
@@ -34,7 +34,7 @@ describe('On component mount', () => {
           ]}
           addTypename={false}
         >
-          <Tasks />
+          <Tasks theme={'dark'}/>
         </MockedProvider>
       )
 
@@ -66,7 +66,7 @@ describe('On component mount', () => {
 
       render(
         <MockedProvider mocks={mocks} addTypename={false}>
-          <Tasks />
+          <Tasks theme={'dark'}/>
         </MockedProvider>
       )
       const elems = ['titre', 'la description', '5%']
