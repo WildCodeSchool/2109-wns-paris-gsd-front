@@ -1,12 +1,9 @@
 # name: Tests CI FRONT
 
 on:
-  # pull_request:
-  #   branches:
-  #     - 'staging'
-  push:
+  pull_request:
     branches:
-      - 'develop'
+      - 'staging'
 
 jobs:
   test-front:
