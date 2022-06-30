@@ -31,12 +31,11 @@ const SingleProject: React.FC<ISingleProject> = ({projectId}) => {
                     <>
                         <SingleProjectTitle projectId={projectId} name={data.getProjectById.name}/>
                         <SingleProjectManager projectId={projectId} users={data.getProjectById.users} />
-                        <SingleProjectDeadline projectId={projectId}  starting_time= {data.getProjectById.starting_time} ending_time= {data.getProjectById.ending_time}/>
+                        <SingleProjectDeadline projectId={projectId}  starting_time= {data.getProjectById.starting_time} ending_time= {data.getProjectById.ending_time} tasks= {data.getProjectById.tasks}/>
                         <SingleProjectMembers users={data.getProjectById.users} projectId={projectId} />
                         <SingleProjectTasks tasks={data.getProjectById.tasks} projectId={projectId}/>
                     </>
                 )
-            
         }
         All the single projects
       </>
