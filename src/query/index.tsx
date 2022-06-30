@@ -21,10 +21,24 @@ export const GET_TASKS = gql`
   }
 `
 
+export const UPDATE_TASK = gql`
+  mutation UpdateTaskbyId($data: UpdateDeleteTaskInput!) {
+    updateTaskbyId(data: $data) {
+      id
+    }
+}
+`;
+
 export const LOGIN_USER = gql`
   query LoginUser($data: LoginInput!) {
     loginUser(data: $data) {
-      token
+      username
+      role {
+        label
+        id
+      }
+      userId
+      isConnected
     }
   }
 `
@@ -61,26 +75,46 @@ export const GET_PROJECTS = gql`
   }
 `
 
+/**
+ * PROJECT QUERIES
+ */
+
 export const GET_PROJECT_BY_ID = gql`
-  query GetProjectById {
-    getProjectById {
+query GetProjectById($getProjectByIdId: Float!) {
+  getProjectById(id: $getProjectByIdId) {
       id
       name
-      tasks {
-        title
-        taskCreator {
-          userName
+      users {
+        id
+        username
+        role {
+          id
+          label
         }
-        advancement
-        status
-        description
-        estimated_time
-        starting_time
-        ending_time
+        email
       }
+      tasks {
+        id
+        title
+        status
+      }
+      starting_time
+      ending_time
     }
   }
 `
+
+export const GET_PROJECT_MEMBERS = gql`
+query GetProjectById($getProjectByIdId: Float!) {
+  getProjectById(id: $getProjectByIdId) {
+    id
+    users {
+      username
+      id
+    }
+  }
+}
+`;
 
 export const GET_USERS = gql`
   query GetUsers {
@@ -89,7 +123,63 @@ export const GET_USERS = gql`
       username
       role {
         label
+        id
       }
     }
   }
 `
+
+export const ADD_USER = gql`
+  mutation AddUser($data: UserInput!) {
+    addUser(data: $data) {
+    username
+      
+  }
+}
+`
+
+export const GET_ROLES = gql`
+  query GetRoles {
+    getRoles {
+      id
+      label
+    }
+}
+`
+export const UPDATE_USER_ROLE = gql`
+mutation UpdateUserRole($data: UpdateRoleInput!) {
+  updateUserRole(data: $data) {
+    role {
+      label
+    }
+  }
+}
+`
+export const TASK_BY_ID = gql`
+query GetTaskById($data: TaskIdInput!) {
+  getTaskById(data: $data) {
+    id
+    title
+    description
+    starting_time
+    ending_time
+    estimated_time
+    advancement
+    status
+    project {
+      id
+      name
+    }
+    taskCreator {
+      id
+      username
+    }
+  }
+}`
+
+export const CHANGE_ASSIGNEE = gql`
+mutation ChangeAssignee($data: ChangeAssigneeInput!) {
+  changeAssignee(data: $data) {
+    id
+  }
+}`;

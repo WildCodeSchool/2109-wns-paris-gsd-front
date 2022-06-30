@@ -1,16 +1,21 @@
 import TasksTable from '../TasksTable/TasksTable'
 import Header from '../Header/Header'
 import Nav from '../Nav/Nav'
+import { ITheme } from '../App/App'
+
 import './AllTasks.scss'
 
-const AllTasks: React.FC = () => {
+
+type IAllTasks = ITheme
+
+const AllTasks: React.FC<IAllTasks> = ({theme}) => {
   
   return (
     <>
       <Header />
       <div className="alltasks_container">
         <Nav />
-        <TasksTable />
+        <TasksTable theme={theme}/>
       </div>
     </>
   )

@@ -10,15 +10,16 @@ import { AuthProvider } from './hooks/useAuth';
 
 
 const httpLink = createHttpLink({
-  uri: `/graphql`,
+  uri: "http://localhost:8000/graphql",
+  credentials: 'include'
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem("token");
+  // const token = localStorage.getItem("token");
   return {
     headers: {
       ...headers,
-      authorization: token,
+      // authorization: token,
     },
   };
 });
@@ -26,6 +27,16 @@ const authLink = setContext((_, { headers }) => {
 const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: authLink.concat(httpLink),
+  // link: httpLink,
+  credentials: 'include',
+
+  // request: async operation => {
+  //   operation.setContext({
+  //     fetchOptions: {
+  //       credentials: 'include'
+  //     }
+  //   })
+  // },
 });
 
 render(

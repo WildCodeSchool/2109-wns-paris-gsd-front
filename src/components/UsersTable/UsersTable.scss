@@ -3,6 +3,7 @@
 
 .users_table_container {
   width: 100%;
+  margin-bottom: 80px;
 
   .users_table {
     @include box();

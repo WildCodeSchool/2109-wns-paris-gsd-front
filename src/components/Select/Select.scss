@@ -3,6 +3,11 @@
 
 .select_container {
   position: relative;
+  max-width: fit-content;
+
+  &--centered {
+    margin: 0 auto;
+  }
 
   .select {
     @include box();
@@ -21,5 +26,13 @@
     top: 50%;
     transform: translateY(-46%);
     pointer-events: none;
+  }
+
+  .delete_icon {
+    position: absolute;
+    right: -40px;
+    cursor: pointer;
+    top: 50%;
+    transform: translateY(-46%);
   }
 }

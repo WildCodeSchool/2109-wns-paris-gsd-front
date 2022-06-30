@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react'
 import { ITask, StatusName } from '../../interfaces/Task'
-
+import Modal from '../Modal/Modal';
+import SingleTask from '../SingleTask/SingleTask';
+import { useModal } from '../../hooks/hooks'
 import { useQuery } from '@apollo/client'
-
+import useAuth from '../../hooks/useAuth';
 import { GET_TASKS } from '../../query'
-
+import {ITheme} from '../App/App'; 
 import Filters from '../Filters/Filters'
 
 import './TaskTable.scss'
@@ -16,6 +18,8 @@ export interface IDefaultSelectValue {
   myTasks: boolean;
 }
 
+type ITaskTable = ITheme
+
 //  On crée un objet avec toutes les options de filtres par defaut
 const DEFAULT_SELECT_VALUE: IDefaultSelectValue = {
   project: 'All projects',
@@ -23,7 +27,7 @@ const DEFAULT_SELECT_VALUE: IDefaultSelectValue = {
   myTasks: false,
 }
 
-const TasksTable: React.FC = () => {
+const TasksTable: React.FC<ITaskTable> = ({theme}) => {
   // toutes les taches recu par la db
   const [Alltasks, setAlltasks] = useState([])
   // l'objet contenant les options de tris
@@ -32,6 +36,12 @@ const TasksTable: React.FC = () => {
   const [filteredTasks, setFilteredTasks] = useState<ITask[]>([])
   // query graphql
   const { loading, error, data } = useQuery(GET_TASKS)
+  // user context 
+  const { user } = useAuth()
+  // modal
+  const {isShowing, toggle} = useModal();
+
+  const [currentTaskId, setCurrentTaskId] = useState<number | undefined>(undefined);
 
   useEffect(() => {
     if (data) {
@@ -39,7 +49,7 @@ const TasksTable: React.FC = () => {
       // on va également ajouter le choix par defaut ('tous les projets') dans le tableau passé au select
       const initListProjectsforSelect = () => {
         const taskProjectNames = data.getTasks.map(
-          (task: ITask) => task.project.name
+          (task: ITask) => task.project?.name
         )
         const taskProjectNamesSorted = taskProjectNames.filter(
           (item: string, index: number) => {
@@ -54,6 +64,11 @@ const TasksTable: React.FC = () => {
     }
   }, [data])
 
+  const handleClick = (curTaskId: number| undefined) => {
+    setCurrentTaskId(curTaskId);
+    toggle();
+  }
+
   useEffect(() => {
     // On recupere toutes les taches de la db qu'on va filtrer selon les options choisies
     const filterByProjectName = (task: ITask) =>
@@ -66,20 +81,25 @@ const TasksTable: React.FC = () => {
       selectedTaskFilterOptions.tasksDone === false
         ? true
         : task.status !== StatusName.DONE
-
+    // Selon l'assigné de la tache
+    const filterByTaskAssignee = (task: ITask) =>
+      selectedTaskFilterOptions.myTasks === false
+        ? true
+        : task.taskCreator?.username == user?.username
     if (data) {
       // On applique les deux filters
       const tasksBySelectedProject = data.getTasks
         .filter(filterByProjectName)
         .filter(filterByTaskDone)
+        .filter(filterByTaskAssignee)
       setFilteredTasks(tasksBySelectedProject)
     }
-  }, [data, selectedTaskFilterOptions])
+  }, [data, selectedTaskFilterOptions, user?.username])
 
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error...</p>
-
   return (
+ 
     <div className="task_table_container">
       <Table 
         entity='task'
@@ -87,7 +107,10 @@ const TasksTable: React.FC = () => {
         data={[...filteredTasks].sort((a,b) => a.title.localeCompare(b.title))}
         displayData={(item : ITask) => {
           return (
-            <tr key={item.id} className="task">
+            
+            <tr key={item.id} className="task modal-toggle" onClick={() => {
+              handleClick(item.id)
+            }}>
               <td className={`task_table_row_item`}>{item.title}</td>
               <td className={`task_table_row_item`}>{item.project?.name}</td>
               <td className={`task_table_row_item`}>{item.status}</td>
@@ -98,8 +121,9 @@ const TasksTable: React.FC = () => {
                 {/* ici on recoit une string time stamp qu'on doit parser en nombre */}
                 {new Date(parseInt(item.ending_time)).toLocaleDateString('fr')}
               </td>
-          <td className={`task_table_row_item`}>{item.advancement}</td>
+              <td className={`task_table_row_item`}>{item.advancement}</td>
             </tr>
+            
           )
         }}
       />
@@ -108,6 +132,12 @@ const TasksTable: React.FC = () => {
         selectedOption={selectedTaskFilterOptions}
         setSelectedOption={setSelectedTaskFilterOptions}
       />
+    <Modal
+      isShowing={isShowing}
+      hide={toggle}
+      theme={theme}
+      content={<SingleTask taskId={currentTaskId} />}
+    />
     </div>
   )
 }
