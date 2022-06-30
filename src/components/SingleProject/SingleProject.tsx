@@ -10,14 +10,18 @@ import SingleProjectManager from './SingleProjectManager/SingleProjectManager';
 import SingleProjectMembers from './SingleProjectMembers/SingleProjectMembers';
 import SingleProjectTasks from './SingleProjectTasks/SingleProjectTasks';
 import SingleProjectTitle from './SingleProjectTitle/SingleProjectTitle';
+import SinglePoopie from './SingleProjectPoopie/SingleProjectPoopie';
+import useAuth from '../../hooks/useAuth';
+
 
 const SingleProject: React.FC<ISingleProject> = ({projectId}) => {
 
-    const [getProjectbyId, {loading, error, data}] = useLazyQuery(GET_PROJECT_BY_ID)
+    const [getProjectbyId, {loading, error, data}] = useLazyQuery(GET_PROJECT_BY_ID);
+    const { user } = useAuth();
+
 
     useEffect(() => {
         if (projectId) {
-            console.log(projectId)
             getProjectbyId({variables: {getProjectByIdId: parseFloat(""+projectId)}}).then((res) => console.log(res))
         }
     }, [getProjectbyId, projectId])
@@ -29,10 +33,11 @@ const SingleProject: React.FC<ISingleProject> = ({projectId}) => {
             data &&
                 (
                     <>
+                        <SinglePoopie projectId={projectId} ending_time={data.getProjectById.ending_time}/>
                         <SingleProjectTitle projectId={projectId} name={data.getProjectById.name}/>
                         <SingleProjectManager projectId={projectId} users={data.getProjectById.users} />
                         <SingleProjectDeadline projectId={projectId}  starting_time= {data.getProjectById.starting_time} ending_time= {data.getProjectById.ending_time} tasks= {data.getProjectById.tasks}/>
-                        <SingleProjectMembers users={data.getProjectById.users} projectId={projectId} />
+                        <SingleProjectMembers users={data.getProjectById.users} projectId={projectId} connectedUser={user} />
                         <SingleProjectTasks tasks={data.getProjectById.tasks} projectId={projectId}/>
                     </>
                 )

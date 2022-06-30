@@ -26,12 +26,14 @@
               z-index: 100;
               background: var(--bg-color);
               color: var(--text-color);
+              border: 2px solid var(--text-color);
               position: relative;
               margin: auto;
               border-radius: 5px;
               width: 90%;
               height: 90%;
               padding: 1rem;
+              overflow-y: scroll;
 
               & svg {
                 fill: var(--text-color);
