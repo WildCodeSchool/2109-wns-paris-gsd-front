@@ -33,6 +33,10 @@
         @include title($color-blue-admin);
       }
 
+      &--progression {
+        @include title($color-blue-progression);
+      }
+
       &--deadline {
         @include title($color-green-deadline);
       }

@@ -96,6 +96,7 @@ query GetProjectById($getProjectByIdId: Float!) {
       tasks {
         id
         title
+        status
       }
       starting_time
       ending_time
