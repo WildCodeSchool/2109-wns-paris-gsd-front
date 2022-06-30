@@ -2,15 +2,18 @@ import ProjectsTable from '../ProjectsTable/ProjectsTable'
 import Header from '../Header/Header'
 import Nav from '../Nav/Nav'
 import './AllProjects.scss'
+import { ITheme } from '../App/App'
 
-const AllProjects: React.FC = () => {
+type IAllProjects = ITheme;
+
+const AllProjects: React.FC<IAllProjects> = ({theme}) => {
   
   return (
     <>
       <Header />
       <div className="allprojects_container">
         <Nav />
-        <ProjectsTable />
+        <ProjectsTable theme={theme} />
       </div>
     </>
   )

@@ -23,7 +23,7 @@ const Nav: React.FC = () => {
           </div>
           <div className="nav_link_tab">Projects</div>
         </NavLink>
-        { user && user.role === 'ADMIN' && <NavLink className="nav_link" to="/users">
+        { user && user.role.label === 'ADMIN' && <NavLink className="nav_link" to="/users">
           <div className="nav_link_icon">
             <img src={BlueStar} alt="blue star" />
           </div>

@@ -1,0 +1,32 @@
+@import '../../style/vars';
+
+.login_error_message {
+  font-size: .85rem;
+  line-height: 1.4;
+  text-align: center;
+  color: $color-red-project;
+  margin-bottom: 5px;
+}
+
+.login_warning_message {
+  font-size: .7rem;
+  line-height: 1.4;
+  text-align: center;
+  margin-bottom: 20px
+}
+
+.login_error_validation {
+  color: $color-red-project;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.login_success_validation {
+  color: $color-green-deadline;
+  margin-top: 10px;
+  text-align: center;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

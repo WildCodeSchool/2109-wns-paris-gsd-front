@@ -25,16 +25,15 @@ const Login: React.FC = () => {
 
   const onSubmit = handleSubmit(async (credentials) => {
     loginUser({variables: { data: credentials }}).then((res) => {
-      login(res.data.loginUser.token);
+      console.log(res);
+      login(res.data.loginUser);
+    }).catch(e => {
+      console.log(e);
     });
   });
 
   if (loading) return <h2>it is loading my dudes!!!...</h2>;
   if (error) return <h2>{`Error: ${error}`}</h2>;
-  if (loginData) {
-    // localStorage.setItem("token", loginData.loginUser.token);
-    // console.log(loginData)
-  };
 
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
@@ -76,11 +75,8 @@ const Login: React.FC = () => {
             Login
           </button>
           <div className="login_link">
-            <a href="#" className="login_link_single">
-              Sign Up
-            </a>
-            <a href="#" className="login_link_single">
-              Forgot Password?
+            <a href="/sign-up" className="login_link_single">
+              Not register ? Sign Up here !
             </a>
           </div>
         </form>
