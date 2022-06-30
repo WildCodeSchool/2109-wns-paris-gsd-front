@@ -7,12 +7,10 @@ import React, {
     useState,
 } from "react";
 
-import IRole from "../interfaces/Role";
 import AuthUser from "../interfaces/AuthUser";
 
-import jwt_decode from 'jwt-decode';
 
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // import { useLazyQuery } from "@apollo/client";
 // import { LOGIN_USER } from "../query";
 

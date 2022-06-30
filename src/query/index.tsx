@@ -196,3 +196,12 @@ mutation ChangeAssignee($data: ChangeAssigneeInput!) {
     id
   }
 }`;
+
+export const ADD_MEMBER = gql`
+  mutation AddMemberToProject($data: AddMemberToProjectInput!) {
+    addMemberToProject(data: $data) {
+      id
+      message
+    }
+  }
+`;
