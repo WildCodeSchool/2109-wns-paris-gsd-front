@@ -1,27 +1,77 @@
 @import '../../../style/vars';
 @import '../../../style/mixins';
 
-.singleDeadline_box_container {
+.singleDeadline_box_container,
+.singleProjectDeadline_box_container,
+.singleProjectManager_box_container,
+.singleProjectMembers_box_container,
+.singleProjectTasks_box_container {
   display: flex;
   flex-direction: column;
   padding: 20px;
   border-collapse: separate;
   @include box();
-  margin-top: 5%;;
+  margin-top: 5%;
+  ;
 
 
-  .singleDeadline_box {
-    @include title($color-green-deadline);
+  .singleDeadline_box,
+  .singleProjectDeadline_box,
+  .singleProjectManager_box,
+  .singleProjectMembers_box,
+  .singleProjectTasks_box {
     width: 100%;
 
-    &__item{
+    &__item {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
       padding: 10px 15px;
     }
+
+    &__itemWithIcon {
+      padding: 15px 15px 5px;
+    }
+
+    &__itemWithScroll {
+      margin: 10px 0;
+      padding: 15px;
+      @include box();
+      overflow: scroll;
+      height: 100px;
+
+    }
+
+    &__itemWithScrollMember {
+      height: 200px;
+      margin: 10px 0;
+      padding: 15px;
+      overflow: scroll;
+
+    }
+
+    &__projectsList {
+      margin: 10px 0;
+    }
+
     &--bold {
       font-weight: bolder;
+    }
+
+    &--deadline {
+      @include title($color-green-deadline);
+    }
+
+    &--manager {
+      @include title($color-blue-admin);
+    }
+
+    &--members {
+      @include title($color-blue-user);
+    }
+
+    &--tasks {
+      @include title($color-yellow-task);
     }
   }
 }
