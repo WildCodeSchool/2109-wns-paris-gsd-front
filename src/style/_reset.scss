@@ -183,7 +183,7 @@ background-color: var(--background-color);
 color: var(--text-olor);
 border:  2px solid var(--text-color);
 border-radius: 4px;
-font-family: Roboto;
+font-family: Roboto !important;
 }
 
 [type="date"]::-webkit-inner-spin-button {

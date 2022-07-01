@@ -11,6 +11,8 @@ import Filters from '../Filters/Filters'
 
 import './TaskTable.scss'
 import Table from '../Table/Table'
+import { RoleName } from '../../interfaces/Role';
+
 
 export interface IDefaultSelectValue {
   project: string;
@@ -48,7 +50,12 @@ const TasksTable: React.FC<ITaskTable> = ({theme}) => {
       // on recupere d'abord juste le nom de tous les projects qu'on va trier pour les afficher dans le select
       // on va également ajouter le choix par defaut ('tous les projets') dans le tableau passé au select
       const initListProjectsforSelect = () => {
-        const taskProjectNames = data.getTasks.map(
+        const taskProjectNames = data.getTasks.filter((task: ITask) => {
+            if (user?.role.label == RoleName.ADMIN)
+              return true;
+            
+            return task?.project?.users?.find((member => member.id === user?.userId))
+        }).map(
           (task: ITask) => task.project?.name
         )
         const taskProjectNamesSorted = taskProjectNames.filter(
