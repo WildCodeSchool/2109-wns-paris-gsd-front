@@ -85,7 +85,7 @@ const SingleProjectMembers: React.FC<ISingleProject> = ({projectId, users, conne
                     )
                 })}
             </ul>
-            {/* {(connectedUser!.role === RoleName.ADMIN || connectedUser!.role === RoleName.MANAGER && allUsers.length) && */}
+            {(allUsers.length && (connectedUser!.role.label === RoleName.ADMIN || connectedUser!.role.label === RoleName.MANAGER)) &&
                 <div className="select_container">
                 <select
                 className="select"
@@ -106,7 +106,7 @@ const SingleProjectMembers: React.FC<ISingleProject> = ({projectId, users, conne
                 <DropdownIcon />
                 <button onClick={handleClick}><AddIcon /></button>
             </div>
-            {/* } */}
+             }
             </div>
             </div>
 
