@@ -177,3 +177,18 @@ img{
   width: 100%;
   height: auto;
 }
+
+[type="date"] {
+background-color: var(--background-color);
+color: var(--text-olor);
+border:  2px solid var(--text-color);
+border-radius: 4px;
+font-family: Roboto;
+}
+
+[type="date"]::-webkit-inner-spin-button {
+  display: none;
+}
+[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+}

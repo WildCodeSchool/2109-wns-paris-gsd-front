@@ -1,87 +1,35 @@
-import { render, screen, waitFor } from '@testing-library/react'
+import matchMedia from './mocks/matchMedia'
+import { render, screen} from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import App from '../components/App/App'
 import { MockedProvider } from '@apollo/client/testing'
-import { GET_TASKS } from '../query'
-import { GraphQLError } from 'graphql'
+import { BrowserRouter } from 'react-router-dom'
+
+/**
+ * ! ISSUE mocking function not implemented in JSDOM
+ * * src: https://jestjs.io/docs/manual-mocks#mocking-methods-which-are-not-implemented-in-jsdom
+ */
+beforeEach(() => {
+  matchMedia()
+});
 
 describe('On component mount', () => {
-  describe('while no data', () => {
-    it('should render loading...', () => {
+  describe('while a user is not connected', () => {
+    it('should render a sign up page', () => {
+      
       render(
         <MockedProvider mocks={[]} addTypename={false}>
-          <App />
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
         </MockedProvider>
       )
 
-      const loadingElem = screen.getByText(/Loading.../i)
-      expect(loadingElem).toBeInTheDocument()
-    })
-  })
-  describe('if fetch error', () => {
-    it('should render Error :', async () => {
-      render(
-        <MockedProvider
-          mocks={[
-            {
-              request: {
-                query: GET_TASKS,
-              },
-              result: {
-                errors: [new GraphQLError('error')],
-              },
-            },
-          ]}
-          addTypename={false}
-        >
-          <App />
-        </MockedProvider>
-      )
+      const inputUsernameElem = screen.getByPlaceholderText(/username/i)
+      const inputPasswordElem = screen.getByPlaceholderText(/password/i)
 
-      const errorElem = await waitFor(() => screen.getByText(/Error.../i))
-      expect(errorElem).toBeInTheDocument()
-    })
-  })
-  describe('if data', () => {
-    it('should render lots of stuff', async () => {
-      const mocks = [
-        {
-          request: {
-            query: GET_TASKS,
-          },
-          result: {
-            data: [
-              {
-                id: 1,
-                title: 'titre',
-                description: 'la description',
-                advancement: 75,
-                scheduled_time: '5',
-                status: 'IN PROGRESS',
-              },
-            ],
-          },
-        },
-      ]
-
-      render(
-        <MockedProvider mocks={mocks} addTypename={false}>
-          <App />
-        </MockedProvider>
-      )
-      const elems = ['titre', 'la description', '5%']
-
-      elems.map(async (elemText) => {
-        const regexp = new RegExp(`/${elemText}/i`)
-        const curElem = await waitFor(() => screen.getByText(regexp))
-        expect(curElem).toBeInTheDocument()
-      })
+      expect(inputUsernameElem).toBeInTheDocument()
+      expect(inputPasswordElem).toBeInTheDocument()
     })
   })
 })
-
-// test('renders learn react link', () => {
-//   render(<App />);
-//   const linkElement = screen.getByText(/learn react/i);
-//   expect(linkElement).toBeInTheDocument();
-// });

@@ -9,10 +9,6 @@
     border-collapse: separate;
     width: 100%;
 
-    & td {
-      cursor: pointer;
-    }
-
     & th, td {
       border: 1px solid var(--text-color);
       text-align: center;
@@ -20,8 +16,17 @@
       padding: 20px 10px;
     }
 
-    & tbody > tr:nth-child(even) {
+    & tbody > tr {    
+    cursor: pointer;
+    
+    &:nth-child(even) {
       background-color: $color-pink-even-table;
+    }
+
+    &:hover {
+      background-color: $color-green-hover-table;
+    }
+
     }
 
     .task_table_header_item {
