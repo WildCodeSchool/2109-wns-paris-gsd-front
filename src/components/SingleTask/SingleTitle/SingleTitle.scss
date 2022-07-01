@@ -1,0 +1,7 @@
+@import '../../../style/vars';
+@import '../../../style/mixins';
+
+.singleTitle {
+  text-align: center;
+  @include title($color-red-project);
+}

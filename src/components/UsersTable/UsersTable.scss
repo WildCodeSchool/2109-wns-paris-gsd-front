@@ -17,9 +17,18 @@
       padding: 20px 10px;
     }
 
-    & tbody > tr:nth-child(even) {
-      background-color: $color-pink-even-table;
-    }
+    & tbody > tr {    
+      cursor: pointer;
+      
+      &:nth-child(even) {
+        background-color: $color-pink-even-table;
+      }
+      
+      &:hover {
+        background-color: $color-green-hover-table;
+      }
+  
+      }
 
     .users_table_header_item {
       &--member {

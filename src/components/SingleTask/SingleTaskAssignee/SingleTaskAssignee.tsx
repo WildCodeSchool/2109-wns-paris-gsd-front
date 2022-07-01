@@ -5,6 +5,7 @@ import { useLazyQuery, useMutation } from '@apollo/client';
 import { GET_PROJECT_MEMBERS, CHANGE_ASSIGNEE, TASK_BY_ID } from '../../../query';
 import DropdownIcon from '../../SVG/DropDownIcon';
 import IUser from '../../../interfaces/User';
+import './SingleTaskAssignee.scss'
 
 const SingleTaskAssignee: React.FC<ISingleTask> = ({taskCreator, project, taskId}) => {
  
@@ -35,7 +36,9 @@ const SingleTaskAssignee: React.FC<ISingleTask> = ({taskCreator, project, taskId
 
   return (
     <>
-      <div className="select_container select_container">
+    <div className={`singleAssignee_box_container`}>
+      <div className="select_container select_container singleAssignee_box">
+        <h3 className={`singleAssignee_box--title`}>Assignee</h3>
         <select
           className="select"
           id="projectUsers"
@@ -53,6 +56,8 @@ const SingleTaskAssignee: React.FC<ISingleTask> = ({taskCreator, project, taskId
         <DropdownIcon />
         {/* <button className="pouet" onClick={handleDelete}><DeleteIcon/></button> */}
       </div>
+
+    </div>
     </>
   )
 }
