@@ -36,7 +36,7 @@
       margin: 10px 0;
       padding: 15px;
       @include box();
-      overflow: scroll;
+      overflow-y: scroll;
       height: 100px;
     }
 
@@ -44,7 +44,21 @@
       height: 200px;
       margin: 10px 0;
       padding: 15px;
-      overflow: scroll;
+      overflow-y: scroll;
+
+      .select_container {
+        padding-left: 15px;
+        padding-top: 30px;
+        .dropdown_icon {
+          transform: translateY(30%);
+        }
+        .add_icon {
+          position: absolute;
+          top: 50%;
+          right: -39px;
+
+        }
+      }
 
     }
 
