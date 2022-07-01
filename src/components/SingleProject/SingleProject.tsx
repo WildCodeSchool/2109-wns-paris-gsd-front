@@ -1,46 +1,68 @@
-import { useEffect } from 'react';
-import { useLazyQuery } from '@apollo/client';
+import { useEffect } from 'react'
+import { useLazyQuery } from '@apollo/client'
 
-import { GET_PROJECT_BY_ID } from '../../query';
+import { GET_PROJECT_BY_ID } from '../../query'
 
 import ISingleProject from '../../interfaces/SingleProject'
 
-import SingleProjectDeadline from './SingleProjectDeadline/SingleProjectDeadline';
-import SingleProjectManager from './SingleProjectManager/SingleProjectManager';
-import SingleProjectMembers from './SingleProjectMembers/SingleProjectMembers';
-import SingleProjectTasks from './SingleProjectTasks/SingleProjectTasks';
-import SingleProjectTitle from './SingleProjectTitle/SingleProjectTitle';
+import SingleProjectDeadline from './SingleProjectDeadline/SingleProjectDeadline'
+import SingleProjectManager from './SingleProjectManager/SingleProjectManager'
+import SingleProjectMembers from './SingleProjectMembers/SingleProjectMembers'
+import SingleProjectTasks from './SingleProjectTasks/SingleProjectTasks'
+import SingleProjectTitle from './SingleProjectTitle/SingleProjectTitle'
 
-const SingleProject: React.FC<ISingleProject> = ({projectId}) => {
+import '../SingleTask/SingleTask.scss'
 
-    const [getProjectbyId, {loading, error, data}] = useLazyQuery(GET_PROJECT_BY_ID)
+const SingleProject: React.FC<ISingleProject> = ({ projectId }) => {
+  const [getProjectbyId, { loading, error, data }] =
+    useLazyQuery(GET_PROJECT_BY_ID)
 
-    useEffect(() => {
-        if (projectId) {
-            console.log(projectId)
-            getProjectbyId({variables: {getProjectByIdId: parseFloat(""+projectId)}}).then()
-        }
-    }, [getProjectbyId, projectId])
+  useEffect(() => {
+    if (projectId) {
+      console.log(projectId)
+      getProjectbyId({
+        variables: { getProjectByIdId: parseFloat('' + projectId) },
+      }).then()
+    }
+  }, [getProjectbyId, projectId])
 
+  return (
+    <>
+      {data && (
+        <>
+          <SingleProjectTitle
+            projectId={projectId}
+            name={data.getProjectById.name}
+          />
+          <div className={`singleProject_box_container`}>
+            <div className={`singleProject_box_column`}>
+              <SingleProjectManager
+                projectId={projectId}
+                users={data.getProjectById.users}
+              />
+              <SingleProjectMembers
+                users={data.getProjectById.users}
+                projectId={projectId}
+              />
+            </div>
+            <div className={`singleProject_box_column`}>
+              <SingleProjectDeadline
+                projectId={projectId}
+                starting_time={data.getProjectById.starting_time}
+                ending_time={data.getProjectById.ending_time}
+                tasks={data.getProjectById.tasks}
+              />
+              <SingleProjectTasks
+                tasks={data.getProjectById.tasks}
+                projectId={projectId}
+              />
+            </div>
+          </div>
+        </>
+      )}
+      {/* All the single projects */}
+    </>
+  )
+}
 
-    return (
-      <>
-        {
-            data &&
-                (
-                    <>
-                        <SingleProjectTitle projectId={projectId} name={data.getProjectById.name}/>
-                        <SingleProjectManager projectId={projectId} users={data.getProjectById.users} />
-                        <SingleProjectDeadline projectId={projectId}  starting_time= {data.getProjectById.starting_time} ending_time= {data.getProjectById.ending_time} tasks= {data.getProjectById.tasks}/>
-                        <SingleProjectMembers users={data.getProjectById.users} projectId={projectId} />
-                        <SingleProjectTasks tasks={data.getProjectById.tasks} projectId={projectId}/>
-                    </>
-                )
-        }
-        All the single projects
-      </>
-    )
-  }
-  
-  
-  export default SingleProject;
+export default SingleProject
