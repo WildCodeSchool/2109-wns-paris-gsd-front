@@ -16,6 +16,7 @@
 
     &__box {
       display: flex;
+      gap: 15px;
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
@@ -40,7 +41,6 @@
     }
 
     &--details {
-      width: 45%;
       text-align: left
     }
   }
