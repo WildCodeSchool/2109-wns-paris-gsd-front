@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useMutation } from '@apollo/client';
 
 import { UPDATE_PROJECT, GET_PROJECT_BY_ID } from '../../../query';
@@ -11,7 +11,7 @@ import { StatusName } from '../../../interfaces/Task';
 import { format } from 'date-fns';
 
 const SingleProjectDeadline: React.FC<ISingleProject> = ({starting_time, ending_time, projectId, tasks}) => {
-    const [dateInput, setDateInput] = useState<string>(format(new Date(ending_time as string| Date | number), 'yyyy-dd-mm' ));
+    const [dateInput, setDateInput] = useState<string>(format(new Date(ending_time as string| Date | number), 'yyyy-dd-MM' ));
 
     const [updateProject, {}] = useMutation(UPDATE_PROJECT,{refetchQueries: [{query: GET_PROJECT_BY_ID,variables: {getProjectByIdId: parseFloat(""+projectId)}}]});
 
@@ -32,6 +32,12 @@ const SingleProjectDeadline: React.FC<ISingleProject> = ({starting_time, ending_
         return taskDonePercent;
 
     }
+
+    useEffect(() => {
+        if (ending_time) {
+            setDateInput(format(new Date(ending_time as string| Date | number), 'yyyy-dd-MM' ));
+        }
+    }, [ending_time])
 
     const onEndDateChange = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();

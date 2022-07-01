@@ -20,7 +20,10 @@ const SingleProjectMembers: React.FC<ISingleProject> = ({projectId, users, conne
     const [addMember, {}] = useMutation(ADD_MEMBER, {refetchQueries: [{query: GET_PROJECT_BY_ID, variables: {getProjectByIdId: parseFloat(""+projectId)}}]});
     const [getUsers, {loading}] = useLazyQuery(GET_USERS)
 
-    const handleChange= (event:  React.ChangeEvent<HTMLSelectElement>) => { setUserId(event.target.value)}
+    const handleChange= (event:  React.ChangeEvent<HTMLSelectElement>) => { 
+        console.log(event.target.value);
+        setUserId(event.target.value)
+    }
 
     useEffect(() => {
         if (users && users.length !== 0) {
@@ -40,7 +43,9 @@ const SingleProjectMembers: React.FC<ISingleProject> = ({projectId, users, conne
     
       
     const handleClick = () => {
-        console.log("je suis clic")
+        if (userId === '') {
+            return ;
+        }
         const variables: {
             data: {
               projectId: number;
@@ -54,7 +59,7 @@ const SingleProjectMembers: React.FC<ISingleProject> = ({projectId, users, conne
               }
           }
           console.log(variables)
-       addMember({variables}).then()
+       addMember({variables}).then(() => setUserId(""))
     }
     return (
         <>
@@ -73,6 +78,9 @@ const SingleProjectMembers: React.FC<ISingleProject> = ({projectId, users, conne
                 onChange={handleChange}
                 value={userId}
                 >
+                    <option value="" disabled hidden>
+                        choose
+                    </option>
                 {allUsers!.length && allUsers!.map((user : IUser, key: number) => (
                     <option key={user + '' + key} value={user.id}>
                     {user.username}
