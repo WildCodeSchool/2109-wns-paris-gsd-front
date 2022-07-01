@@ -48,12 +48,6 @@ const SingleTask: React.FC<ISingleTask> = ({ taskId }) => {
                 estimated_time={data.getTaskById.estimated_time}
                 taskId={taskId}
               />
-              <SingleStatus
-                status={data.getTaskById.status}
-                advancement={data.getTaskById.advancement}
-                estimated_time={data.getTaskById.estimated_time}
-                taskId={taskId}
-              />
             </div>
           </div>
         </>

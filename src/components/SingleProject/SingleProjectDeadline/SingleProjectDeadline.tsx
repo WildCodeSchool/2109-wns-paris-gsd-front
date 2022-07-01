@@ -85,7 +85,6 @@ const SingleProjectDeadline: React.FC<ISingleProject> = ({
       <div className={`singleProjectDeadline_box_container`}>
         <h3 className={`singleProjectDeadline_box--deadline`}>DEADLINE</h3>
         <div className={`singleProjectDeadline_box__item`}>
-          <p>{endingTime.toLocaleDateString('fr')}</p>
         </div>
         <div className={`singleProjectDeadline_box__item`}>
           <p>timeSpent : </p>
@@ -99,8 +98,8 @@ const SingleProjectDeadline: React.FC<ISingleProject> = ({
             {getTaskDonePercent()}%
           </p>
         </div>
-        <form onSubmit={onEndDateChange}>
-          <label htmlFor="endingTime">date d&apos;echeance</label>
+        <form onSubmit={onEndDateChange} className="form_deadline">
+          <label htmlFor="endingTime">Ending date : </label>
           <input
             type="date"
             name="ending_time"

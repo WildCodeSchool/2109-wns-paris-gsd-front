@@ -6,3 +6,7 @@
   text-align: center;
   @include title($color-red-project);
 }
+
+.singleProjectTitle {
+  margin:30px 0 50px;
+}
