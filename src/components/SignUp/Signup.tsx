@@ -144,7 +144,7 @@ const Signup: React.FC = () => {
               <p className="login_warning_message">Password must be at least 8 letters long and contains a number, an uppercase letter and a special character</p>
             </div>
             <button type="submit" className="login_submit">
-              Login
+              Sign up
             </button>
             {error &&  <h2 className="login_error_validation">{`Error: ${error}`}</h2>}
             {isSuccess &&  <Link to={'/'}><h2 className="login_success_validation">Your account has been created you can sign in now</h2></Link>}
