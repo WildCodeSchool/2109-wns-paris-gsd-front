@@ -2,7 +2,7 @@
 @import '../../../style/mixins';
 
 .singleAssignee_box_container {
-  margin-top: 5px;
+  margin-top: 20px;
 
   @include title($color-blue-user);
 
@@ -14,5 +14,9 @@
     &--title{
       margin: 0 20px;
     }
+  }
+
+  .dropdown_icon {
+    transform: translateY(-60%) !important;
   }
 }

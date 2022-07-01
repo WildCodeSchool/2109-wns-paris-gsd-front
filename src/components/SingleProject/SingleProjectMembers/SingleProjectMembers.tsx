@@ -9,7 +9,9 @@ import { RoleName } from "../../../interfaces/Role";
 
 import DropdownIcon from "../../SVG/DropDownIcon";
 import AddIcon from "../../SVG/AddIcon";
-
+import poopie from '../../../assets/img/goodpoopie.png'
+import '../../SingleTask/SingleDeadline/SingleDeadline.scss'
+import './../../Profile/Profile.scss'
 
 
 const SingleProjectMembers: React.FC<ISingleProject> = ({projectId, users, connectedUser}) => {
@@ -63,10 +65,24 @@ const SingleProjectMembers: React.FC<ISingleProject> = ({projectId, users, conne
     }
     return (
         <>
-            <p>Member list:</p>
+              <div className={`singleProjectMembers_box_container`}>
+        <h3 className={`singleProjectMembers_box--members`}>Members</h3>
+        <div className={`singleProjectMembers_box__itemWithScrollMember`}>
             <ul>
                 {users!.map((user: IUser) => {
-                    return <li key={"user_"+user.id}>{user.username}</li>
+                     return (
+                      <div
+                        className={`singleProjectMembers_box__itemWithIcon`}
+                        key={'user_' + user.id}
+                      >
+                        <div className="profile_container">
+                          <div className="profile_image">
+                            <img src={poopie} alt="po" />
+                          </div>
+                          <li>{user.username}</li>
+                        </div>
+                      </div>
+                    )
                 })}
             </ul>
             {(connectedUser!.role === "ADMIN" || 'MANAGER' && allUsers.length) &&
@@ -91,9 +107,12 @@ const SingleProjectMembers: React.FC<ISingleProject> = ({projectId, users, conne
                 <button onClick={handleClick}><AddIcon /></button>
             </div>
             }
+            </div>
+            </div>
+
         </>
     )
 
 }
 
-export default SingleProjectMembers;
+export default SingleProjectMembers

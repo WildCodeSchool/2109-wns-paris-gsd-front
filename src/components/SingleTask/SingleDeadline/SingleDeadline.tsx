@@ -14,7 +14,7 @@ const SingleDeadline: React.FC<ISingleTask> = ({
   return (
     <>
       <div className={`singleDeadline_box_container`}>
-        <h3 className={`singleDeadline_box`}>DEADLINE</h3>
+        <h3 className={`singleDeadline_box--deadline`}>DEADLINE</h3>
         <div className={`singleDeadline_box__item`}>
           <p>Estimated_time :</p>
           <p className={`singleDeadline_box--bold`}>{estimated_time}</p>
