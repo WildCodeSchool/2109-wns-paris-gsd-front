@@ -12,7 +12,6 @@
   border-collapse: separate;
   @include box();
   margin-top: 5%;
-  ;
 
 
   .singleDeadline_box,
@@ -39,7 +38,6 @@
       @include box();
       overflow: scroll;
       height: 100px;
-
     }
 
     &__itemWithScrollMember {
@@ -52,6 +50,9 @@
 
     &__projectsList {
       margin: 10px 0;
+      &:nth-child(even) {
+        background-color: $color-pink-even-table;
+      }
     }
 
     &--bold {
@@ -72,6 +73,20 @@
 
     &--tasks {
       @include title($color-yellow-task);
+    }
+  }
+
+  .form_deadline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+
+    button {
+      @include box();
+      padding: 5px 10px;
+      font-weight: 600;
+
     }
   }
 }

@@ -67,7 +67,6 @@ const SingleProject: React.FC<ISingleProject> = ({ projectId }) => {
           </div>
         </>
       )}
-      {/* All the single projects */}
     </>
   )
 }
