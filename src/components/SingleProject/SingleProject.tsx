@@ -49,6 +49,7 @@ const SingleProject: React.FC<ISingleProject> = ({ projectId }) => {
               <SingleProjectMembers
                 users={data.getProjectById.users}
                 projectId={projectId}
+                connectedUser={user}
               />
             </div>
             <div className={`singleProject_box_column`}>
