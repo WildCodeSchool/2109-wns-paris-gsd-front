@@ -7,29 +7,30 @@ import React, {
     useState,
 } from "react";
 
-import jwt_decode from 'jwt-decode';
+import AuthUser from "../interfaces/AuthUser";
 
-import { useNavigate, useLocation } from "react-router-dom";
+
+import { useNavigate } from "react-router-dom";
 // import { useLazyQuery } from "@apollo/client";
 // import { LOGIN_USER } from "../query";
 
 
-interface Role {
-  label:string;
-  id: number;
-}
+// interface Role {
+//   label:string;
+//   id: number;
+// }
 
-type User = {
-    username: string;
-    role: Role;
-    userId: number;
-    isConnected: boolean; 
-} | null;
+// type User = {
+//     username: string;
+//     role: Role;
+//     userId: number;
+//     isConnected: boolean; 
+// } | null;
 
 interface AuthContextType {
     loggedIn: boolean;
-    user?: User;
-    login: (loginAnswer: User) => void;
+    user?: AuthUser;
+    login: (loginAnswer: AuthUser) => void;
     // signUp: (username: string, password: string) => void;
     logout: () => void;
 }
@@ -50,16 +51,11 @@ export function AuthProvider({
   }): JSX.Element {
     
     const [loggedIn, setLoggedIn] = useState<boolean>(false);
-    const [user, setUser] = useState<{
-        username: string;
-        role: Role;
-        userId: number;
-        isConnected: boolean;
-    } | null>(null);
+    const [user, setUser] = useState<AuthUser>(null);
    
     const navigate = useNavigate()
 
-    function login(loginAnswer: User) {
+    function login(loginAnswer: AuthUser) {
       // TODO make a call api
         //   loginUser({variables: {data: {username, password}}})
 
@@ -70,7 +66,7 @@ export function AuthProvider({
         // decode the token
         
         
-        const payload: User = loginAnswer;
+        const payload: AuthUser = loginAnswer;
 
         localStorage.setItem("connection", JSON.stringify(payload));
 

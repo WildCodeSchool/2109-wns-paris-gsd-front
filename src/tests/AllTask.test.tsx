@@ -1,23 +1,26 @@
-import { render, screen, waitFor } from '@testing-library/react'
-import '@testing-library/jest-dom/extend-expect'
-import Tasks from '../components/TasksTable/TasksTable'
-import { MockedProvider } from '@apollo/client/testing'
-import { GET_TASKS } from '../query'
-import { GraphQLError } from 'graphql'
+import { MockedProvider } from "@apollo/client/testing";
+import { render, screen, waitFor } from "@testing-library/react";
+import { GraphQLError } from "graphql";
+import { BrowserRouter } from "react-router-dom";
+import AllTasks from "../components/AllTasks/AllTasks";
+import { GET_TASKS } from "../query";
 
 describe('On component mount', () => {
   describe('while no data', () => {
     it('should render loading...', () => {
       render(
         <MockedProvider mocks={[]} addTypename={false}>
-          <Tasks theme={'dark'}/>
+           <BrowserRouter>
+            <AllTasks theme={'light'}/>
+          </BrowserRouter>
         </MockedProvider>
       )
 
       const loadingElem = screen.getByText(/Loading.../i)
-      expect(loadingElem).toBeInTheDocument()
-    })
-  })
+      expect(loadingElem).toBeTruthy()
+    });
+  });
+
   describe('if fetch error', () => {
     it('should render Error :', async () => {
       render(
@@ -34,14 +37,17 @@ describe('On component mount', () => {
           ]}
           addTypename={false}
         >
-          <Tasks theme={'dark'}/>
+          <BrowserRouter>
+            <AllTasks theme={'light'}/>
+          </BrowserRouter>
         </MockedProvider>
       )
 
       const errorElem = await waitFor(() => screen.getByText(/Error.../i))
-      expect(errorElem).toBeInTheDocument()
+      expect(errorElem).toBeTruthy()
     })
   })
+
   describe('if data', () => {
     it('should render lots of stuff', async () => {
       const mocks = [
@@ -59,6 +65,22 @@ describe('On component mount', () => {
                 scheduled_time: '5',
                 status: 'IN PROGRESS',
               },
+              {
+                id: 2,
+                title: 'titre',
+                description: 'la description',
+                advancement: 75,
+                scheduled_time: '5',
+                status: 'IN PROGRESS',
+              },
+              {
+                id: 3,
+                title: 'titre',
+                description: 'la description',
+                advancement: 75,
+                scheduled_time: '5',
+                status: 'IN PROGRESS',
+              },
             ],
           },
         },
@@ -66,7 +88,9 @@ describe('On component mount', () => {
 
       render(
         <MockedProvider mocks={mocks} addTypename={false}>
-          <Tasks theme={'dark'}/>
+          <BrowserRouter>
+            <AllTasks theme={'light'}/>
+          </BrowserRouter>
         </MockedProvider>
       )
       const elems = ['titre', 'la description', '5%']
@@ -78,10 +102,5 @@ describe('On component mount', () => {
       })
     })
   })
-})
 
-// test('renders learn react link', () => {
-//   render(<App />);
-//   const linkElement = screen.getByText(/learn react/i);
-//   expect(linkElement).toBeInTheDocument();
-// });
+})

@@ -116,6 +116,19 @@ query GetProjectById($getProjectByIdId: Float!) {
 }
 `;
 
+export const UPDATE_PROJECT = gql`
+mutation Mutation($data: ProjectUpdateInput!) {
+  updateProject(data: $data) {
+    id
+    message
+  }
+}
+`;
+
+/**
+ * USERS QUERIES
+ */
+
 export const GET_USERS = gql`
   query GetUsers {
     getUsers {
@@ -183,3 +196,12 @@ mutation ChangeAssignee($data: ChangeAssigneeInput!) {
     id
   }
 }`;
+
+export const ADD_MEMBER = gql`
+  mutation AddMemberToProject($data: AddMemberToProjectInput!) {
+    addMemberToProject(data: $data) {
+      id
+      message
+    }
+  }
+`;

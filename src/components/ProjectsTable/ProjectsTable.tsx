@@ -45,7 +45,6 @@ const ProjectsTable: React.FC<ISingleProject> = ({theme}) => {
                 const totalTasks = item.tasks?.length;
                 const tasksDone = item.tasks?.filter((task: ISingleTask) => task.status === StatusName.DONE).length;
                 const projectDonePercent = (totalTasks === 0) ? 0 : (tasksDone!*100)/totalTasks!;
-
                 const projectStatus = projectDonePercent === 0 ? 'NEW' : projectDonePercent === 100 ? 'DONE' : 'IN PROGRESS'; 
 
                 return(

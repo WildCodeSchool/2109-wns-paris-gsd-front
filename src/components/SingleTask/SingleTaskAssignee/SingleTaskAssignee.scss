@@ -1,0 +1,18 @@
+@import '../../../style/vars';
+@import '../../../style/mixins';
+
+.singleAssignee_box_container {
+  margin-top: 5px;
+
+  @include title($color-blue-user);
+
+  .singleAssignee_box {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin: 0 auto;
+    &--title{
+      margin: 0 20px;
+    }
+  }
+}
