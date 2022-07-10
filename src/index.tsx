@@ -10,9 +10,11 @@ import { AuthProvider } from './hooks/useAuth';
 
 
 const httpLink = createHttpLink({
-  uri: "/graphql",
+  uri: "http://localhost:8000/graphql",
   credentials: 'include'
 });
+
+console.log(httpLink)
 
 const authLink = setContext((_, { headers }) => {
   // const token = localStorage.getItem("token");
